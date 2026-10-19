@@ -5,7 +5,9 @@
 
 {% block content %}
 <section class="form-page">
+  <p class="eyebrow">{% trans "PUCAR LEARNING" %}</p>
   <h1>{% trans "Create your account" %}</h1>
+  <p class="page-intro">{% trans "Create an account to access staff learning resources." %}</p>
   <form method="post">
     {% csrf_token %}
     {% include "partials/_form_errors.html" %}
@@ -14,7 +16,7 @@
     {% endfor %}
     <button type="submit" class="button">{% trans "Sign up" %}</button>
   </form>
-  <p>
+  <p class="form-page__switch">
     {% trans "Already have an account?" %}
     <a href="{% url 'accounts:login' %}">{% trans "Log in" %}</a>
   </p>

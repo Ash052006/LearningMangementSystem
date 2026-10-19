@@ -8,6 +8,7 @@
   <p class="breadcrumb">
     <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
   </p>
+  <p class="eyebrow">{% trans "COURSE BUILDER" %}</p>
   <h1>{% trans "Delete lesson" %}</h1>
   <p>
     {% blocktrans with title=object.title %}

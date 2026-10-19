@@ -5,14 +5,36 @@
 
 {% block content %}
 <section>
-  <h1>{% trans "Dashboard" %}</h1>
-  <p>
-    <a class="button" href="{% url 'courses:instructor_dashboard' %}">
-      {% trans "Course analytics" %}
+  <div class="dashboard-welcome">
+    <div class="dashboard-welcome__copy">
+      <p class="eyebrow">{% trans "INSTRUCTOR WORKSPACE" %}</p>
+      <h1>{% trans "Build learning that works for your team." %}</h1>
+      <p>{% trans "Create practical courses, organize lessons and follow learner progress from one place." %}</p>
+      <div class="form-actions">
+        <a class="button" href="{% url 'courses:course_create' %}">{% trans "Create a course" %} <span aria-hidden="true">→</span></a>
+        <a class="button button--secondary" href="{% url 'courses:instructor_course_list' %}">{% trans "Manage my courses" %}</a>
+      </div>
+    </div>
+    <div class="dashboard-welcome__mark" aria-hidden="true">
+      <svg viewBox="0 0 200 180" focusable="false">
+        <rect x="24" y="30" width="116" height="126" rx="10"></rect>
+        <path d="M50 62h62M50 82h62M50 102h38"></path>
+        <circle cx="142" cy="125" r="34"></circle>
+        <path d="m128 125 10 10 19-22"></path>
+      </svg>
+    </div>
+  </div>
+  <div class="dashboard-shortcuts">
+    <a class="shortcut-card" href="{% url 'courses:instructor_dashboard' %}">
+      <span class="shortcut-card__icon" aria-hidden="true">↗</span>
+      <span><strong>{% trans "Course analytics" %}</strong><small>{% trans "Review enrolments and learner progress" %}</small></span>
+      <span class="shortcut-card__arrow" aria-hidden="true">→</span>
     </a>
-    <a class="button button--secondary" href="{% url 'courses:instructor_course_list' %}">
-      {% trans "Manage my courses" %}
+    <a class="shortcut-card" href="{% url 'courses:instructor_course_list' %}">
+      <span class="shortcut-card__icon" aria-hidden="true">▤</span>
+      <span><strong>{% trans "Manage courses" %}</strong><small>{% trans "Edit course details, lessons and quizzes" %}</small></span>
+      <span class="shortcut-card__arrow" aria-hidden="true">→</span>
     </a>
-  </p>
+  </div>
 </section>
 {% endblock %}

@@ -4,57 +4,82 @@
 {% block title %}{{ course.title }} — {{ block.super }}{% endblock %}
 
 {% block content %}
-<section>
+<section class="course-overview">
   <p class="breadcrumb">
     <a href="{% url 'courses:catalogue' %}">{% trans "Course catalogue" %}</a>
   </p>
 
-  <h1>{{ course.title }}</h1>
-  <p class="meta">
-    {% blocktrans with name=course.instructor.get_username %}Instructor: {{ name }}{% endblocktrans %}
-  </p>
-  {% if course.description %}<p>{{ course.description }}</p>{% endif %}
+  <div class="course-hero">
+    <div class="course-hero__copy">
+      <p class="eyebrow">{% if is_preview %}{% trans "INSTRUCTOR PREVIEW" %}{% elif enrollment %}{% trans "YOUR LEARNING" %}{% else %}{% trans "COURSE" %}{% endif %}</p>
+      <h1>{{ course.title }}</h1>
+      <p class="course-hero__instructor">
+        {% blocktrans with name=course.instructor.get_username %}Instructor: {{ name }}{% endblocktrans %}
+      </p>
+      {% if course.description %}<p class="course-hero__description">{{ course.description }}</p>{% endif %}
+    </div>
+    <div class="course-hero__art" aria-hidden="true">
+      <svg viewBox="0 0 180 150" focusable="false">
+        <path d="M28 34c23-8 44-3 62 10v78c-18-13-39-18-62-10z"></path>
+        <path d="M152 34c-23-8-44-3-62 10v78c18-13 39-18 62-10z"></path>
+        <path d="M44 54c14-2 26 1 36 7M44 68c14-2 26 1 36 7M136 54c-14-2-26 1-36 7M136 68c-14-2-26 1-36 7"></path>
+        <circle cx="135" cy="30" r="10"></circle>
+      </svg>
+    </div>
+  </div>
 
   {% if enrollment %}
-    {% include "courses/_progress.html" %}
-    {% if continue_lesson %}
-      <p>
-        <a class="button" href="{% url 'courses:learner_lesson_detail' course.pk continue_lesson.pk %}">
-          {% trans "Continue" %}
-        </a>
-      </p>
-    {% endif %}
-    {% if quiz %}
-      <p>
-        <a class="button button--secondary" href="{% url 'quizzes:take' course.pk %}">
-          {% trans "Take the quiz" %}
-        </a>
-      </p>
-    {% endif %}
-    {% if certificate or certificate_eligible %}
-      {# Issuing a certificate is a write: POST, then redirect to print it. #}
-      <form method="post" action="{% url 'courses:certificate_issue' course.pk %}">
-        {% csrf_token %}
-        <button type="submit" class="button button--secondary">
-          {% trans "Download certificate" %}
-        </button>
-      </form>
-    {% endif %}
+    <div class="course-enrolled-panel">
+      <div class="course-enrolled-panel__progress">{% include "courses/_progress.html" %}</div>
+      <div class="course-enrolled-panel__actions">
+        {% if continue_lesson %}
+          <a class="button" href="{% url 'courses:learner_lesson_detail' course.pk continue_lesson.pk %}">
+            {% trans "Continue learning" %} <span aria-hidden="true">→</span>
+          </a>
+        {% endif %}
+        {% if quiz %}
+          <a class="button button--secondary" href="{% url 'quizzes:take' course.pk %}">
+            {% trans "Take the quiz" %}
+          </a>
+        {% endif %}
+        {% if certificate or certificate_eligible %}
+          {# Issuing a certificate is a write: POST, then redirect to print it. #}
+          <form method="post" action="{% url 'courses:certificate_issue' course.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="button button--secondary">
+              {% trans "Download certificate" %}
+            </button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
   {% elif is_preview %}
-    <p class="notice">{% trans "You are previewing this course as its instructor; learner progress is not recorded." %}</p>
+    <p class="notice notice--info">{% trans "You are previewing this course as its instructor; learner progress is not recorded." %}</p>
   {% else %}
     {# Enrolling is a state change: POST only. #}
-    <form method="post" action="{% url 'courses:enrol' course.pk %}">
-      {% csrf_token %}
-      <button type="submit" class="button">{% trans "Enrol" %}</button>
-    </form>
+    <div class="course-enrol-panel">
+      <div>
+        <p class="eyebrow">{% trans "READY WHEN YOU ARE" %}</p>
+        <p>{% trans "Enrol to open the lessons and track your progress." %}</p>
+      </div>
+      <form method="post" action="{% url 'courses:enrol' course.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="button">{% trans "Enrol in this course" %} <span aria-hidden="true">→</span></button>
+      </form>
+    </div>
   {% endif %}
 
-  <h2>{% trans "Lessons" %}</h2>
-  <ol class="lesson-list">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">{% trans "COURSE CONTENT" %}</p>
+      <h2>{% trans "Lessons" %}</h2>
+    </div>
+    <span class="section-heading__detail">{% blocktrans count n=lessons|length %}{{ n }} lesson{% plural %}{{ n }} lessons{% endblocktrans %}</span>
+  </div>
+  <ol class="lesson-list lesson-outline">
     {% for row in lesson_rows %}
       <li class="lesson-item">
-        <div class="lesson-title">
+        <div class="lesson-title lesson-outline__title">
           <span class="lesson-position" aria-hidden="true">{{ row.lesson.position }}</span>
           {% if enrollment or is_preview %}
             {% if row.unlocked %}
@@ -68,6 +93,11 @@
           {% endif %}
           {% if row.completed %}<span class="tag tag--done">{% trans "Done" %}</span>{% endif %}
         </div>
+        {% if row.unlocked and enrollment and not row.completed %}
+          <span class="lesson-outline__state">{% trans "Ready" %}</span>
+        {% elif row.locked_by %}
+          <span class="lesson-outline__state lesson-outline__state--locked">{% trans "Locked" %}</span>
+        {% endif %}
         {% if row.locked_by %}
           <p class="locked-reason">
             {% blocktrans with title=row.locked_by.title %}Complete “{{ title }}” first.{% endblocktrans %}

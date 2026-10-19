@@ -4,11 +4,14 @@
 {% block title %}{{ lesson.title }} — {{ block.super }}{% endblock %}
 
 {% block content %}
-<section class="lesson-page">
+<section class="lesson-page learning-page">
   <p class="breadcrumb">
     <a href="{% url 'courses:learner_course_detail' course.pk %}">{{ course.title }}</a>
   </p>
-  <h1>{{ lesson.title }}</h1>
+  <div class="lesson-heading">
+    <p class="eyebrow">{% trans "LESSON" %}{% if lesson.position %} <span aria-hidden="true">·</span> {{ lesson.position }}{% endif %}</p>
+    <h1>{{ lesson.title }}</h1>
+  </div>
 
   {% if not is_preview %}{% include "courses/_progress.html" %}{% endif %}
 
@@ -16,7 +19,7 @@
   <div class="lesson-content">{{ lesson.content|linebreaks }}</div>
 
   {% if lesson.video_url %}
-    <p>
+    <p class="lesson-resource">
       <a href="{{ lesson.video_url }}" target="_blank" rel="noopener noreferrer">
         {% trans "Watch the video" %}
         <span class="visually-hidden">{% trans "(opens in a new tab)" %}</span>
@@ -25,7 +28,7 @@
   {% endif %}
   {% if lesson.attachment %}
     {# Attachments are private: link to the permission-checked download view. #}
-    <p><a href="{% url 'courses:lesson_attachment' course.pk lesson.pk %}">{% trans "Download the attachment" %}</a></p>
+    <p class="lesson-resource"><a href="{% url 'courses:lesson_attachment' course.pk lesson.pk %}">{% trans "Download the attachment" %}</a></p>
   {% endif %}
 
   {% if is_preview %}

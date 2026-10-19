@@ -5,16 +5,25 @@
 
 {% block content %}
 <section>
-  <div class="page-heading">
-    <h1>{% trans "Course catalogue" %}</h1>
-    <a class="button button--secondary" href="{% url 'courses:my_courses' %}">{% trans "My courses" %}</a>
+  <div class="catalogue-hero">
+    <div>
+      <p class="eyebrow">{% trans "LEARN AT YOUR PACE" %}</p>
+      <h1>{% trans "Find your next course" %}</h1>
+      <p class="page-intro">{% trans "Explore practical learning from your team. Pick up where you left off or discover something new." %}</p>
+    </div>
+    <a class="button button--secondary" href="{% url 'courses:my_courses' %}">
+      {% trans "My courses" %}
+      <span aria-hidden="true">→</span>
+    </a>
   </div>
 
   <form class="catalogue-filters" method="get" role="search"
         aria-label="{% trans 'Search and filter courses' %}">
-    {% include "partials/_field.html" with field=filter_form.q %}
-    {% include "partials/_field.html" with field=filter_form.instructor %}
-    {% include "partials/_field.html" with field=filter_form.sort %}
+    <div class="catalogue-filters__fields">
+      {% include "partials/_field.html" with field=filter_form.q %}
+      {% include "partials/_field.html" with field=filter_form.instructor %}
+      {% include "partials/_field.html" with field=filter_form.sort %}
+    </div>
     <div class="form-actions">
       <button type="submit" class="button">{% trans "Filter" %}</button>
       <a class="button button--secondary" href="{% url 'courses:catalogue' %}">{% trans "Clear" %}</a>
@@ -25,25 +34,40 @@
     <ul class="course-cards">
       {% for course in courses %}
         <li class="course-card">
-          <h2>
-            <a href="{% url 'courses:learner_course_detail' course.pk %}">{{ course.title }}</a>
-          </h2>
-          <p class="meta">
-            {% blocktrans with name=course.instructor.get_username %}Instructor: {{ name }}{% endblocktrans %}
-          </p>
-          <p class="meta">
-            {% blocktrans count n=course.lesson_count %}{{ n }} lesson{% plural %}{{ n }} lessons{% endblocktrans %}
-          </p>
+          <a class="course-card__link" href="{% url 'courses:learner_course_detail' course.pk %}">
+            <span class="course-card__art course-card__art--{{ forloop.counter0|divisibleby:4|yesno:'one,two' }}" aria-hidden="true">
+              <svg viewBox="0 0 64 64" focusable="false">
+                <path d="M12 16.5c7.3-2.3 14-.8 20 3.7v29c-6-4.5-12.7-6-20-3.7z"></path>
+                <path d="M52 16.5c-7.3-2.3-14-.8-20 3.7v29c6-4.5 12.7-6 20-3.7z"></path>
+                <path d="M20 25c3.6-.4 6.5.2 9 1.8M20 31c3.6-.4 6.5.2 9 1.8M44 25c-3.6-.4-6.5.2-9 1.8M44 31c-3.6-.4-6.5.2-9 1.8"></path>
+              </svg>
+            </span>
+            <span class="course-card__body">
+              <span class="course-card__meta">
+                {% blocktrans with name=course.instructor.get_username %}By {{ name }}{% endblocktrans %}
+                <span aria-hidden="true">·</span>
+                {% blocktrans count n=course.lesson_count %}{{ n }} lesson{% plural %}{{ n }} lessons{% endblocktrans %}
+              </span>
+              <span class="course-card__title">{{ course.title }}</span>
+              {% if course.description %}
+                <span class="course-card__description">{{ course.description|truncatewords:24 }}</span>
+              {% endif %}
+              <span class="course-card__action">{% trans "Explore course" %} <span aria-hidden="true">↗</span></span>
+            </span>
+          </a>
         </li>
       {% endfor %}
     </ul>
     {% include "partials/_pagination.html" %}
   {% else %}
-    {% if querystring %}
-      <p>{% trans "No published courses match your search or filters." %}</p>
-    {% else %}
-      <p>{% trans "No published courses yet." %}</p>
-    {% endif %}
+    <div class="empty-state">
+      <span class="empty-state__icon" aria-hidden="true">⌕</span>
+      <h2>{% if querystring %}{% trans "No published courses match" %}{% else %}{% trans "No published courses yet" %}{% endif %}</h2>
+      <p>{% if querystring %}{% trans "Try a different search or clear the filters to see all available courses." %}{% else %}{% trans "Published courses will appear here when they are ready to learn." %}{% endif %}</p>
+      {% if querystring %}
+        <a class="button button--secondary" href="{% url 'courses:catalogue' %}">{% trans "Clear filters" %}</a>
+      {% endif %}
+    </div>
   {% endif %}
 </section>
 {% endblock %}

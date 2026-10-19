@@ -13,6 +13,7 @@
     {% endif %}
   </p>
 
+  <p class="eyebrow">{% trans "COURSE ASSESSMENT" %}</p>
   <h1>{% trans "Quiz result" %}</h1>
 
   {% if preview %}
@@ -21,24 +22,27 @@
     </p>
   {% endif %}
 
-  <p class="status-badge {% if result.passed %}status-badge--pass{% else %}status-badge--fail{% endif %}">
-    {% if result.passed %}{% trans "Passed" %}{% else %}{% trans "Failed" %}{% endif %}
-  </p>
+  <div class="quiz-result-card">
+    <p class="status-badge {% if result.passed %}status-badge--pass{% else %}status-badge--fail{% endif %}">
+      {% if result.passed %}{% trans "Passed" %}{% else %}{% trans "Failed" %}{% endif %}
+    </p>
 
-  <ul class="result-summary">
-    <li>
-      {% blocktrans with score=result.score total=result.total %}Score: {{ score }} of {{ total }}{% endblocktrans %}
-    </li>
-    <li>
-      {% blocktrans with percent=result.percent %}Result: {{ percent }}%{% endblocktrans %}
-    </li>
-    <li>
-      {% blocktrans with mark=quiz.pass_mark %}Pass mark: {{ mark }}%{% endblocktrans %}
-    </li>
-  </ul>
+    <ul class="result-summary">
+      <li>
+        {% blocktrans with score=result.score total=result.total %}Score: {{ score }} of {{ total }}{% endblocktrans %}
+      </li>
+      <li>
+        {% blocktrans with percent=result.percent %}Result: {{ percent }}%{% endblocktrans %}
+      </li>
+      <li>
+        {% blocktrans with mark=quiz.pass_mark %}Pass mark: {{ mark }}%{% endblocktrans %}
+      </li>
+    </ul>
+  </div>
 
   {% if history %}
     <h2>{% trans "Attempt history" %}</h2>
+    <div class="table-scroll">
     <table class="data-table">
       <caption class="visually-hidden">{% trans "All your attempts at this quiz, newest first" %}</caption>
       <thead>
@@ -71,6 +75,7 @@
         {% endfor %}
       </tbody>
     </table>
+    </div>
   {% endif %}
 
   {% if review %}

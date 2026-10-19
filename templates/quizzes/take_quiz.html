@@ -13,6 +13,7 @@
     {% endif %}
   </p>
 
+  <p class="eyebrow">{% trans "COURSE ASSESSMENT" %}</p>
   <h1>{% trans "Quiz" %}</h1>
 
   {% if preview %}
@@ -21,7 +22,7 @@
     </p>
   {% endif %}
 
-  <p class="meta">
+  <p class="quiz-pass-mark">
     {% blocktrans with mark=quiz.pass_mark %}Pass mark: {{ mark }}%{% endblocktrans %}
   </p>
 

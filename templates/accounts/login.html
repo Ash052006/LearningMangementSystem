@@ -5,7 +5,9 @@
 
 {% block content %}
 <section class="form-page">
+  <p class="eyebrow">{% trans "WELCOME BACK" %}</p>
   <h1>{% trans "Log in" %}</h1>
+  <p class="page-intro">{% trans "Sign in to continue your learning or manage your courses." %}</p>
   <form method="post">
     {% csrf_token %}
     {% include "partials/_form_errors.html" %}
@@ -16,7 +18,7 @@
     {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
     <button type="submit" class="button">{% trans "Log in" %}</button>
   </form>
-  <p>
+  <p class="form-page__switch">
     {% trans "No account yet?" %}
     <a href="{% url 'accounts:signup' %}">{% trans "Sign up" %}</a>
   </p>

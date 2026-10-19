@@ -5,47 +5,51 @@
 
 {% block content %}
 <section>
-  <div class="page-heading">
-    <h1>{% trans "Dashboard" %}</h1>
-    <a class="button" href="{% url 'courses:course_create' %}">{% trans "New course" %}</a>
+  <div class="page-heading page-heading--intro">
+    <div>
+      <p class="eyebrow">{% trans "INSTRUCTOR WORKSPACE" %}</p>
+      <h1>{% trans "Course analytics" %}</h1>
+      <p class="page-intro">{% trans "A view of the courses you own and how learners are progressing." %}</p>
+    </div>
+    <a class="button" href="{% url 'courses:course_create' %}">{% trans "New course" %} <span aria-hidden="true">+</span></a>
   </div>
 
   {% if courses %}
-    <table class="data-table">
-      <caption class="visually-hidden">{% trans "Your courses, learners and status" %}</caption>
-      <thead>
-        <tr>
-          <th scope="col">{% trans "Course" %}</th>
-          <th scope="col">{% trans "Status" %}</th>
-          <th scope="col">{% trans "Lessons" %}</th>
-          <th scope="col">{% trans "Learners" %}</th>
-          <th scope="col">{% trans "Actions" %}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for course in courses %}
-          <tr>
-            <td>
-              <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
-            </td>
-            <td>{% include "courses/instructor/_status_badge.html" %}</td>
-            <td>{{ course.lesson_count }}</td>
-            <td>{{ course.learner_count }}</td>
-            {# Hidden course name gives each repeated action a distinct name. #}
-            <td class="actions">
-              <a href="{% url 'courses:course_dashboard' course.pk %}">
-                {% trans "View progress" %}<span class="visually-hidden"> {{ course.title }}</span>
-              </a>
-              <a href="{% url 'courses:course_dashboard_csv' course.pk %}">
-                {% trans "CSV" %}<span class="visually-hidden"> {{ course.title }}</span>
-              </a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="course-management-grid">
+      {% for course in courses %}
+        <article class="management-card">
+          <div class="management-card__top">
+            {% include "courses/instructor/_status_badge.html" %}
+            <span class="management-card__date">{{ course.created_at|date:"DATE_FORMAT" }}</span>
+          </div>
+          <h2><a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a></h2>
+          {% if course.description %}<p>{{ course.description|truncatewords:22 }}</p>{% endif %}
+          <dl class="management-card__facts">
+            <div><dt>{% trans "Lessons" %}</dt><dd>{{ course.lesson_count }}</dd></div>
+            <div><dt>{% trans "Learners" %}</dt><dd>{{ course.learner_count }}</dd></div>
+          </dl>
+          <div class="management-card__actions">
+            <a class="button button--secondary" href="{% url 'courses:course_dashboard' course.pk %}">
+              {% trans "View progress" %}
+            </a>
+            <a class="text-action" href="{% url 'courses:course_detail' course.pk %}">
+              {% trans "Manage course" %} <span aria-hidden="true">→</span>
+            </a>
+            <a class="text-action" href="{% url 'courses:course_dashboard_csv' course.pk %}"
+               aria-label="{% trans 'Download learner CSV for' %} {{ course.title }}">
+              {% trans "Download CSV" %}
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
   {% else %}
-    <p>{% trans "You have not created any courses yet." %}</p>
+    <div class="empty-state">
+      <span class="empty-state__icon" aria-hidden="true">＋</span>
+      <h2>{% trans "Your first course starts here" %}</h2>
+      <p>{% trans "Create a course, add lessons and a quiz, then publish it when it is ready for learners." %}</p>
+      <a class="button" href="{% url 'courses:course_create' %}">{% trans "Create a course" %}</a>
+    </div>
   {% endif %}
 </section>
 {% endblock %}

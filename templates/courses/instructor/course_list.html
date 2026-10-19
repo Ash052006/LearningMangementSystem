@@ -4,50 +4,49 @@
 {% block title %}{% trans "My courses" %} — {{ block.super }}{% endblock %}
 
 {% block content %}
-<section>
-  <div class="page-heading">
-    <h1>{% trans "My courses" %}</h1>
-    <a class="button" href="{% url 'courses:course_create' %}">{% trans "New course" %}</a>
+<section class="management-page">
+  <div class="page-heading page-heading--intro">
+    <div>
+      <p class="eyebrow">{% trans "INSTRUCTOR WORKSPACE" %}</p>
+      <h1>{% trans "My courses" %}</h1>
+      <p class="page-intro">{% trans "Manage your drafts and published learning content." %}</p>
+    </div>
+    <a class="button" href="{% url 'courses:course_create' %}">{% trans "New course" %} <span aria-hidden="true">+</span></a>
   </div>
 
   {% if courses %}
-    <table class="data-table">
-      <caption class="visually-hidden">{% trans "Your courses and their status" %}</caption>
-      <thead>
-        <tr>
-          <th scope="col">{% trans "Title" %}</th>
-          <th scope="col">{% trans "Status" %}</th>
-          <th scope="col">{% trans "Lessons" %}</th>
-          <th scope="col">{% trans "Actions" %}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for course in courses %}
-          <tr>
-            <td>
-              <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
-            </td>
-            <td>{% include "courses/instructor/_status_badge.html" %}</td>
-            <td>{{ course.lesson_count }}</td>
-            {# Hidden course name gives each repeated action a distinct name. #}
-            <td class="actions">
-              <a href="{% url 'courses:course_edit' course.pk %}">
-                {% trans "Edit" %}<span class="visually-hidden"> {{ course.title }}</span>
-              </a>
-              <form method="post" action="{% url 'courses:course_toggle_publish' course.pk %}">
-                {% csrf_token %}
-                <button type="submit" class="button-link">
-                  {% if course.is_published %}{% trans "Unpublish" %}{% else %}{% trans "Publish" %}{% endif %}
-                  <span class="visually-hidden"> {{ course.title }}</span>
-                </button>
-              </form>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="course-management-grid">
+      {% for course in courses %}
+        <article class="management-card">
+          <div class="management-card__top">
+            {% include "courses/instructor/_status_badge.html" %}
+            <span class="management-card__date">{% blocktrans count n=course.lesson_count %}{{ n }} lesson{% plural %}{{ n }} lessons{% endblocktrans %}</span>
+          </div>
+          <h2><a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a></h2>
+          {% if course.description %}<p>{{ course.description|truncatewords:24 }}</p>{% endif %}
+          <div class="management-card__actions">
+            <a class="button button--secondary" href="{% url 'courses:course_detail' course.pk %}">{% trans "Manage course" %}</a>
+            <a class="text-action" href="{% url 'courses:course_edit' course.pk %}">
+              {% trans "Edit" %}<span class="visually-hidden"> {{ course.title }}</span>
+            </a>
+            <form method="post" action="{% url 'courses:course_toggle_publish' course.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="text-action">
+                {% if course.is_published %}{% trans "Unpublish" %}{% else %}{% trans "Publish" %}{% endif %}
+                <span class="visually-hidden"> {{ course.title }}</span>
+              </button>
+            </form>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
   {% else %}
-    <p>{% trans "You have not created any courses yet." %}</p>
+    <div class="empty-state">
+      <span class="empty-state__icon" aria-hidden="true">＋</span>
+      <h2>{% trans "You have not created any courses yet." %}</h2>
+      <p>{% trans "Create a course to start adding lessons and learning material." %}</p>
+      <a class="button" href="{% url 'courses:course_create' %}">{% trans "Create a course" %}</a>
+    </div>
   {% endif %}
 </section>
 {% endblock %}

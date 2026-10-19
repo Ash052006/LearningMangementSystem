@@ -4,17 +4,23 @@
 {% block title %}{{ course.title }} — {{ block.super }}{% endblock %}
 
 {% block content %}
-<section>
+<section class="management-page">
   <p class="breadcrumb">
     <a href="{% url 'courses:instructor_course_list' %}">{% trans "My courses" %}</a>
   </p>
 
-  <div class="page-heading">
-    <h1>{{ course.title }} {% include "courses/instructor/_status_badge.html" %}</h1>
+  <div class="course-management-heading">
+    <div>
+      <p class="eyebrow">{% trans "COURSE BUILDER" %}</p>
+      <div class="page-heading page-heading--title">
+        <h1>{{ course.title }}</h1>
+        {% include "courses/instructor/_status_badge.html" %}
+      </div>
+      {% if course.description %}<p class="page-intro">{{ course.description }}</p>{% endif %}
+    </div>
   </div>
-  {% if course.description %}<p>{{ course.description }}</p>{% endif %}
 
-  <div class="toolbar">
+  <div class="toolbar management-toolbar">
     <a class="button" href="{% url 'courses:course_dashboard' course.pk %}">{% trans "Learner progress" %}</a>
     <a class="button button--secondary" href="{% url 'courses:lesson_create' course.pk %}">{% trans "Add lesson" %}</a>
     <a class="button button--secondary" href="{% url 'courses:course_edit' course.pk %}">{% trans "Edit course" %}</a>
@@ -28,7 +34,10 @@
     <a class="button button--danger" href="{% url 'courses:course_delete' course.pk %}">{% trans "Delete course" %}</a>
   </div>
 
-  <h2>{% trans "Lessons" %}</h2>
+  <div class="section-heading">
+    <div><p class="eyebrow">{% trans "LEARNING MATERIAL" %}</p><h2>{% trans "Lessons" %}</h2></div>
+    <span class="section-heading__detail">{% blocktrans count n=course.lessons.count %}{{ n }} lesson{% plural %}{{ n }} lessons{% endblocktrans %}</span>
+  </div>
   {% if course.lessons.all %}
     <ol class="lesson-list">
       {% for lesson in course.lessons.all %}
@@ -67,8 +76,8 @@
     <p>{% trans "This course has no lessons yet. Add one before publishing." %}</p>
   {% endif %}
 
-  <h2>{% trans "Quiz" %}</h2>
-  <div class="toolbar">
+  <div class="section-heading section-heading--spaced">
+    <div><p class="eyebrow">{% trans "ASSESSMENT" %}</p><h2>{% trans "Quiz" %}</h2></div>
     <a class="button button--secondary" href="{% url 'quizzes:quiz_edit' course.pk %}">
       {% if course.quiz %}{% trans "Edit quiz" %}{% else %}{% trans "Add quiz" %}{% endif %}
     </a>

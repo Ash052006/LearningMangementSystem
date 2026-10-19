@@ -4,27 +4,44 @@
 {% block title %}{% trans "My courses" %} — {{ block.super }}{% endblock %}
 
 {% block content %}
-<section>
-  <h1>{% trans "My courses" %}</h1>
+<section class="learner-dashboard">
+  <div class="page-heading page-heading--intro">
+    <div>
+      <p class="eyebrow">{% trans "YOUR LEARNING" %}</p>
+      <h1>{% trans "My courses" %}</h1>
+      <p class="page-intro">{% trans "Pick up a course and continue at your own pace." %}</p>
+    </div>
+    <a class="button button--secondary" href="{% url 'courses:catalogue' %}">{% trans "Explore courses" %} <span aria-hidden="true">→</span></a>
+  </div>
 
   {% if enrollments %}
     <ul class="course-cards">
       {% for enrollment in enrollments %}
-        <li class="course-card">
-          <h2>
-            <a href="{% url 'courses:learner_course_detail' enrollment.course.pk %}">
-              {{ enrollment.course.title }}
-            </a>
-          </h2>
-          {% include "courses/_progress.html" with progress=enrollment.progress progress_label=enrollment.course.title %}
+        <li class="course-card learner-course-card">
+          <a class="course-card__link" href="{% url 'courses:learner_course_detail' enrollment.course.pk %}">
+            <span class="course-card__art course-card__art--one" aria-hidden="true">
+              <svg viewBox="0 0 64 64" focusable="false">
+                <path d="M12 16.5c7.3-2.3 14-.8 20 3.7v29c-6-4.5-12.7-6-20-3.7z"></path>
+                <path d="M52 16.5c-7.3-2.3-14-.8-20 3.7v29c6-4.5 12.7-6 20-3.7z"></path>
+                <path d="M20 25c3.6-.4 6.5.2 9 1.8M44 25c-3.6-.4-6.5.2-9 1.8"></path>
+              </svg>
+            </span>
+            <span class="course-card__body">
+              <span class="course-card__title">{{ enrollment.course.title }}</span>
+              <span class="course-card__progress">{% include "courses/_progress.html" with progress=enrollment.progress progress_label=enrollment.course.title %}</span>
+              <span class="course-card__action">{% trans "Open course" %} <span aria-hidden="true">→</span></span>
+            </span>
+          </a>
         </li>
       {% endfor %}
     </ul>
   {% else %}
-    <p>
-      {% trans "You are not enrolled in any courses yet." %}
-      <a href="{% url 'courses:catalogue' %}">{% trans "Browse the catalogue" %}</a>.
-    </p>
+    <div class="empty-state">
+      <span class="empty-state__icon" aria-hidden="true">⌕</span>
+      <h2>{% trans "Your learning list is empty" %}</h2>
+      <p>{% trans "You are not enrolled in any courses yet. Browse the catalogue to find a course to get started." %}</p>
+      <a class="button" href="{% url 'courses:catalogue' %}">{% trans "Browse the catalogue" %}</a>
+    </div>
   {% endif %}
 </section>
 {% endblock %}

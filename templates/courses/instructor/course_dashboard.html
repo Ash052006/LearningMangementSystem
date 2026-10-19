@@ -4,15 +4,19 @@
 {% block title %}{{ course.title }} — {% trans "Learner progress" %} — {{ block.super }}{% endblock %}
 
 {% block content %}
-<section>
+<section class="management-page">
   <p class="breadcrumb">
     <a href="{% url 'courses:instructor_dashboard' %}">{% trans "Dashboard" %}</a>
     ·
     <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
   </p>
 
-  <div class="page-heading">
-    <h1>{{ course.title }} — {% trans "Learner progress" %}</h1>
+  <div class="page-heading page-heading--intro">
+    <div>
+      <p class="eyebrow">{% trans "COURSE ANALYTICS" %}</p>
+      <h1>{{ course.title }}</h1>
+      <p class="page-intro">{% trans "Learner progress" %}</p>
+    </div>
     <a class="button" href="{% url 'courses:course_dashboard_csv' course.pk %}">
       {% trans "Download CSV" %}
     </a>
@@ -26,6 +30,7 @@
 
   <h2>{% trans "Learners" %}</h2>
   {% if learner_rows %}
+    <div class="table-scroll">
     <table class="data-table">
       <caption class="visually-hidden">{% trans "Each learner's progress and quiz results" %}</caption>
       <thead>
@@ -59,12 +64,18 @@
         {% endfor %}
       </tbody>
     </table>
+    </div>
   {% else %}
-    <p>{% trans "No learners have enrolled yet." %}</p>
+    <div class="empty-state">
+      <span class="empty-state__icon" aria-hidden="true">◷</span>
+      <h2>{% trans "No learners have enrolled yet." %}</h2>
+      <p>{% trans "Learner enrolments and progress will appear here." %}</p>
+    </div>
   {% endif %}
 
   <h2>{% trans "Question analytics" %}</h2>
   {% if question_rows %}
+    <div class="table-scroll">
     <table class="data-table">
       <caption class="visually-hidden">{% trans "How often each question was answered correctly" %}</caption>
       <thead>
@@ -86,6 +97,7 @@
         {% endfor %}
       </tbody>
     </table>
+    </div>
   {% else %}
     <p>{% trans "This course has no quiz analytics yet." %}</p>
   {% endif %}

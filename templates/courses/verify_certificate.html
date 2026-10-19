@@ -4,7 +4,8 @@
 {% block title %}{% trans "Verify certificate" %} — {{ block.super }}{% endblock %}
 
 {% block content %}
-<section class="verify">
+<section class="verify form-page">
+  <p class="eyebrow">{% trans "CERTIFICATE" %}</p>
   <h1>{% trans "Certificate verification" %}</h1>
 
   {% if certificate %}
