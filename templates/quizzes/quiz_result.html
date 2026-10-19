@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Quiz result" %} — {{ course.title }} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="form-page form-page--wide">
+  <p class="breadcrumb">
+    {% if preview %}
+      <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
+    {% else %}
+      <a href="{% url 'courses:learner_course_detail' course.pk %}">{{ course.title }}</a>
+    {% endif %}
+  </p>
+
+  <h1>{% trans "Quiz result" %}</h1>
+
+  {% if preview %}
+    <p class="notice notice--warning" role="alert">
+      {% trans "Preview mode: nothing was saved." %}
+    </p>
+  {% endif %}
+
+  <p class="status-badge {% if result.passed %}status-badge--pass{% else %}status-badge--fail{% endif %}">
+    {% if result.passed %}{% trans "Passed" %}{% else %}{% trans "Failed" %}{% endif %}
+  </p>
+
+  <ul class="result-summary">
+    <li>
+      {% blocktrans with score=result.score total=result.total %}Score: {{ score }} of {{ total }}{% endblocktrans %}
+    </li>
+    <li>
+      {% blocktrans with percent=result.percent %}Result: {{ percent }}%{% endblocktrans %}
+    </li>
+    <li>
+      {% blocktrans with mark=quiz.pass_mark %}Pass mark: {{ mark }}%{% endblocktrans %}
+    </li>
+  </ul>
+
+  {% if history %}
+    <h2>{% trans "Attempt history" %}</h2>
+    <table class="data-table">
+      <caption class="visually-hidden">{% trans "All your attempts at this quiz, newest first" %}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{% trans "When" %}</th>
+          <th scope="col">{% trans "Score" %}</th>
+          <th scope="col">{% trans "Result" %}</th>
+          <th scope="col"><span class="visually-hidden">{% trans "Details" %}</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in history %}
+          <tr>
+            <td>{{ item.submitted_at }}</td>
+            <td>
+              {% blocktrans with score=item.score total=item.total percent=item.percent %}{{ score }} of {{ total }} ({{ percent }}%){% endblocktrans %}
+            </td>
+            <td>{% if item.passed %}{% trans "Passed" %}{% else %}{% trans "Failed" %}{% endif %}</td>
+            <td>
+              {% if item.pk == attempt.pk %}
+                <span class="tag">{% trans "This attempt" %}</span>
+              {% else %}
+                {# Hidden qualifier so repeated "View" links are distinguishable. #}
+                <a href="{% url 'quizzes:result' course.pk item.pk %}">
+                  {% trans "View" %}<span class="visually-hidden"> {% blocktrans with when=item.submitted_at %}attempt from {{ when }}{% endblocktrans %}</span>
+                </a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  {% if review %}
+    <h2>{% trans "Answer review" %}</h2>
+    <ol class="review-list">
+      {% for row in review %}
+        <li class="question-block">
+          <p class="question-text">{{ row.question.text }}</p>
+          <p class="{% if row.is_correct %}review-correct{% else %}review-wrong{% endif %}">
+            {% if row.selected %}
+              {% blocktrans with choice=row.selected.text %}Your answer: {{ choice }}{% endblocktrans %}
+            {% else %}
+              {% trans "Your answer: no answer" %}
+            {% endif %}
+          </p>
+          {% if not row.is_correct %}
+            <p>
+              {% if row.correct_choice %}
+                {% blocktrans with choice=row.correct_choice.text %}Correct answer: {{ choice }}{% endblocktrans %}
+              {% else %}
+                {% trans "This question no longer has a correct answer." %}
+              {% endif %}
+            </p>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+  <div class="form-actions">
+    {% if can_retake %}
+      <a class="button" href="{% url 'quizzes:take' course.pk %}">{% trans "Retake quiz" %}</a>
+    {% endif %}
+    {% if preview %}
+      <a class="button button--secondary" href="{% url 'courses:course_detail' course.pk %}">
+        {% trans "Back to course" %}
+      </a>
+    {% else %}
+      <a class="button button--secondary" href="{% url 'courses:learner_course_detail' course.pk %}">
+        {% trans "Back to course" %}
+      </a>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

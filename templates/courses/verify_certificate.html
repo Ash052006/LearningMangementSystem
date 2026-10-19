@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Verify certificate" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="verify">
+  <h1>{% trans "Certificate verification" %}</h1>
+
+  {% if certificate %}
+    <p class="verify-status verify-status--valid">{% trans "Valid certificate" %}</p>
+    <p>
+      {% blocktrans with name=certificate.holder_name %}This certificate was issued to {{ name }} for completing:{% endblocktrans %}
+    </p>
+    <p class="verify-course">{{ certificate.course.title }}</p>
+    <p class="meta">{% trans "Issued" %}: {{ certificate.issued_at|date:"DATE_FORMAT" }}</p>
+    <p class="meta">{% trans "Certificate code" %}: {{ certificate.code }}</p>
+  {% else %}
+    <p class="verify-status verify-status--invalid">
+      {% trans "No certificate was found for this code." %}
+    </p>
+  {% endif %}
+</section>
+{% endblock %}

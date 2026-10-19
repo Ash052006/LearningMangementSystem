@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+  {% if course %}{% trans "Edit course" %}{% else %}{% trans "New course" %}{% endif %} — {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<section class="form-page">
+  <h1>
+    {% if course %}{% trans "Edit course" %}{% else %}{% trans "New course" %}{% endif %}
+  </h1>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include "partials/_form_errors.html" %}
+    {% for field in form %}
+      {% include "partials/_field.html" %}
+    {% endfor %}
+    <div class="form-actions">
+      <button type="submit" class="button">{% trans "Save course" %}</button>
+      <a class="button button--secondary"
+         href="{% if course %}{% url 'courses:course_detail' course.pk %}{% else %}{% url 'courses:instructor_course_list' %}{% endif %}">
+        {% trans "Cancel" %}
+      </a>
+    </div>
+  </form>
+</section>
+{% endblock %}

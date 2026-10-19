@@ -1,0 +1,27 @@
+# Run the app in a container:
+#
+#     docker compose up --build
+#
+# then open http://localhost:8000/.  The SQLite database lives on the named
+# volume `demo-data`, so courses and progress survive restarts; delete it with
+# `docker compose down -v` to start from a clean database.
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # Production-style settings: no debug, and a real secret.  Replace the
+      # key for anything shared or public (see .env.example for local use).
+      DEBUG: "False"
+      SECRET_KEY: "change-me-before-deploying"
+      ALLOWED_HOSTS: "localhost,127.0.0.1"
+      # Point SQLite at the mounted volume so data persists across restarts.
+      DATABASE_PATH: /data/db.sqlite3
+      # seed_demo is idempotent, so it is safe to run on every start.
+      SEED_DEMO: "1"
+    volumes:
+      - demo-data:/data
+
+volumes:
+  demo-data:

@@ -1,0 +1,10 @@
+target-version = "py312"
+line-length = 88
+exclude = [".venv", "migrations"]
+
+[lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[lint.per-file-ignores]
+# Django's generated validator/paths strings exceed the line limit.
+"config/settings.py" = ["E501"]

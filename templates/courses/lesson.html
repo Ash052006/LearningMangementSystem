@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ lesson.title }} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="lesson-page">
+  <p class="breadcrumb">
+    <a href="{% url 'courses:learner_course_detail' course.pk %}">{{ course.title }}</a>
+  </p>
+  <h1>{{ lesson.title }}</h1>
+
+  {% if not is_preview %}{% include "courses/_progress.html" %}{% endif %}
+
+  {# `linebreaks` turns blank lines into paragraphs; content stays autoescaped. #}
+  <div class="lesson-content">{{ lesson.content|linebreaks }}</div>
+
+  {% if lesson.video_url %}
+    <p>
+      <a href="{{ lesson.video_url }}" target="_blank" rel="noopener noreferrer">
+        {% trans "Watch the video" %}
+        <span class="visually-hidden">{% trans "(opens in a new tab)" %}</span>
+      </a>
+    </p>
+  {% endif %}
+  {% if lesson.attachment %}
+    {# Attachments are private: link to the permission-checked download view. #}
+    <p><a href="{% url 'courses:lesson_attachment' course.pk lesson.pk %}">{% trans "Download the attachment" %}</a></p>
+  {% endif %}
+
+  {% if is_preview %}
+    <p class="notice">{% trans "Preview: learner progress is not recorded." %}</p>
+  {% elif is_complete %}
+    <p class="done-note">{% trans "You have completed this lesson." %}</p>
+  {% else %}
+    <form method="post" action="{% url 'courses:lesson_complete' course.pk lesson.pk %}">
+      {% csrf_token %}
+      <button type="submit" class="button">{% trans "Mark complete" %}</button>
+    </form>
+  {% endif %}
+
+  <nav class="lesson-nav" aria-label="{% trans 'Lesson navigation' %}">
+    {% if previous_lesson %}
+      <a class="button button--secondary" href="{% url 'courses:learner_lesson_detail' course.pk previous_lesson.pk %}">
+        &larr; {% trans "Previous" %}
+      </a>
+    {% endif %}
+    {% if next_lesson and next_unlocked %}
+      <a class="button button--secondary" href="{% url 'courses:learner_lesson_detail' course.pk next_lesson.pk %}">
+        {% trans "Next" %} &rarr;
+      </a>
+    {% elif next_lesson %}
+      <span class="locked-reason">
+        {% blocktrans with title=next_lesson.title %}Finish this lesson to unlock “{{ title }}”.{% endblocktrans %}
+      </span>
+    {% endif %}
+  </nav>
+</section>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ course.title }} — {% trans "Learner progress" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section>
+  <p class="breadcrumb">
+    <a href="{% url 'courses:instructor_dashboard' %}">{% trans "Dashboard" %}</a>
+    ·
+    <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
+  </p>
+
+  <div class="page-heading">
+    <h1>{{ course.title }} — {% trans "Learner progress" %}</h1>
+    <a class="button" href="{% url 'courses:course_dashboard_csv' course.pk %}">
+      {% trans "Download CSV" %}
+    </a>
+  </div>
+
+  <ul class="stat-summary">
+    <li><strong>{{ enrolled_count }}</strong> {% trans "enrolled" %}</li>
+    <li><strong>{{ completed_count }}</strong> {% trans "completed all lessons" %}</li>
+    <li><strong>{{ passed_count }}</strong> {% trans "passed the quiz" %}</li>
+  </ul>
+
+  <h2>{% trans "Learners" %}</h2>
+  {% if learner_rows %}
+    <table class="data-table">
+      <caption class="visually-hidden">{% trans "Each learner's progress and quiz results" %}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{% trans "Learner" %}</th>
+          <th scope="col">{% trans "Enrolled" %}</th>
+          <th scope="col">{% trans "Lessons" %}</th>
+          <th scope="col">{% trans "Progress" %}</th>
+          <th scope="col">{% trans "Best quiz" %}</th>
+          <th scope="col">{% trans "Passed" %}</th>
+          <th scope="col">{% trans "Attempts" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in learner_rows %}
+          <tr>
+            <td>{{ row.username }}</td>
+            <td>{{ row.enrolled_at|date:"Y-m-d H:i" }}</td>
+            <td>{{ row.lessons_completed }} / {{ row.total_lessons }}</td>
+            <td>{{ row.percent }}%</td>
+            <td>
+              {% if row.best_quiz_percent is not None %}
+                {{ row.best_quiz_percent|floatformat:2 }}%
+              {% else %}
+                —
+              {% endif %}
+            </td>
+            <td>{% if row.passed %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
+            <td>{{ row.attempts_count }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>{% trans "No learners have enrolled yet." %}</p>
+  {% endif %}
+
+  <h2>{% trans "Question analytics" %}</h2>
+  {% if question_rows %}
+    <table class="data-table">
+      <caption class="visually-hidden">{% trans "How often each question was answered correctly" %}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{% trans "Question" %}</th>
+          <th scope="col">{% trans "Answers" %}</th>
+          <th scope="col">{% trans "Correct" %}</th>
+          <th scope="col">{% trans "Correct %" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in question_rows %}
+          <tr>
+            <td>{{ row.question.text }}</td>
+            <td>{{ row.answers_count }}</td>
+            <td>{{ row.correct_count }}</td>
+            <td>{{ row.percent }}%</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>{% trans "This course has no quiz analytics yet." %}</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ course.title }} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section>
+  <p class="breadcrumb">
+    <a href="{% url 'courses:catalogue' %}">{% trans "Course catalogue" %}</a>
+  </p>
+
+  <h1>{{ course.title }}</h1>
+  <p class="meta">
+    {% blocktrans with name=course.instructor.get_username %}Instructor: {{ name }}{% endblocktrans %}
+  </p>
+  {% if course.description %}<p>{{ course.description }}</p>{% endif %}
+
+  {% if enrollment %}
+    {% include "courses/_progress.html" %}
+    {% if continue_lesson %}
+      <p>
+        <a class="button" href="{% url 'courses:learner_lesson_detail' course.pk continue_lesson.pk %}">
+          {% trans "Continue" %}
+        </a>
+      </p>
+    {% endif %}
+    {% if quiz %}
+      <p>
+        <a class="button button--secondary" href="{% url 'quizzes:take' course.pk %}">
+          {% trans "Take the quiz" %}
+        </a>
+      </p>
+    {% endif %}
+    {% if certificate or certificate_eligible %}
+      {# Issuing a certificate is a write: POST, then redirect to print it. #}
+      <form method="post" action="{% url 'courses:certificate_issue' course.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="button button--secondary">
+          {% trans "Download certificate" %}
+        </button>
+      </form>
+    {% endif %}
+  {% elif is_preview %}
+    <p class="notice">{% trans "You are previewing this course as its instructor; learner progress is not recorded." %}</p>
+  {% else %}
+    {# Enrolling is a state change: POST only. #}
+    <form method="post" action="{% url 'courses:enrol' course.pk %}">
+      {% csrf_token %}
+      <button type="submit" class="button">{% trans "Enrol" %}</button>
+    </form>
+  {% endif %}
+
+  <h2>{% trans "Lessons" %}</h2>
+  <ol class="lesson-list">
+    {% for row in lesson_rows %}
+      <li class="lesson-item">
+        <div class="lesson-title">
+          <span class="lesson-position" aria-hidden="true">{{ row.lesson.position }}</span>
+          {% if enrollment or is_preview %}
+            {% if row.unlocked %}
+              <a href="{% url 'courses:learner_lesson_detail' course.pk row.lesson.pk %}">{{ row.lesson.title }}</a>
+            {% else %}
+              <span class="lesson-name">{{ row.lesson.title }}</span>
+              <span class="tag tag--locked">{% trans "Locked" %}</span>
+            {% endif %}
+          {% else %}
+            <span class="lesson-name">{{ row.lesson.title }}</span>
+          {% endif %}
+          {% if row.completed %}<span class="tag tag--done">{% trans "Done" %}</span>{% endif %}
+        </div>
+        {% if row.locked_by %}
+          <p class="locked-reason">
+            {% blocktrans with title=row.locked_by.title %}Complete “{{ title }}” first.{% endblocktrans %}
+          </p>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>{% trans "This course has no lessons yet." %}</li>
+    {% endfor %}
+  </ol>
+</section>
+{% endblock %}

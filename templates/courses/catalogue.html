@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Course catalogue" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section>
+  <div class="page-heading">
+    <h1>{% trans "Course catalogue" %}</h1>
+    <a class="button button--secondary" href="{% url 'courses:my_courses' %}">{% trans "My courses" %}</a>
+  </div>
+
+  <form class="catalogue-filters" method="get" role="search"
+        aria-label="{% trans 'Search and filter courses' %}">
+    {% include "partials/_field.html" with field=filter_form.q %}
+    {% include "partials/_field.html" with field=filter_form.instructor %}
+    {% include "partials/_field.html" with field=filter_form.sort %}
+    <div class="form-actions">
+      <button type="submit" class="button">{% trans "Filter" %}</button>
+      <a class="button button--secondary" href="{% url 'courses:catalogue' %}">{% trans "Clear" %}</a>
+    </div>
+  </form>
+
+  {% if courses %}
+    <ul class="course-cards">
+      {% for course in courses %}
+        <li class="course-card">
+          <h2>
+            <a href="{% url 'courses:learner_course_detail' course.pk %}">{{ course.title }}</a>
+          </h2>
+          <p class="meta">
+            {% blocktrans with name=course.instructor.get_username %}Instructor: {{ name }}{% endblocktrans %}
+          </p>
+          <p class="meta">
+            {% blocktrans count n=course.lesson_count %}{{ n }} lesson{% plural %}{{ n }} lessons{% endblocktrans %}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+    {% include "partials/_pagination.html" %}
+  {% else %}
+    {% if querystring %}
+      <p>{% trans "No published courses match your search or filters." %}</p>
+    {% else %}
+      <p>{% trans "No published courses yet." %}</p>
+    {% endif %}
+  {% endif %}
+</section>
+{% endblock %}

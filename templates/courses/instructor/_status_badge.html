@@ -1,0 +1,7 @@
+{% load i18n %}
+{% comment %}Status badge for a course; expects `course` in the context.{% endcomment %}
+{% if course.is_published %}
+  <span class="status-badge status-badge--published">{% trans "Published" %}</span>
+{% else %}
+  <span class="status-badge status-badge--draft">{% trans "Draft" %}</span>
+{% endif %}

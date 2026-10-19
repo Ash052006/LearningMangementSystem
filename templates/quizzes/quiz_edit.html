@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Quiz" %} — {{ course.title }} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="form-page form-page--wide">
+  <p class="breadcrumb">
+    <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
+  </p>
+  <h1>{% trans "Quiz" %}</h1>
+
+  {% if has_attempts %}
+    <p class="notice notice--warning" role="alert">
+      {% trans "This quiz already has recorded attempts. Editing questions or choices will not delete those attempts, but learners who revisit the quiz may see different questions. Removing a choice detaches it from old answers; the recorded score is unchanged." %}
+    </p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ question_formset.management_form }}
+
+    <fieldset class="question-block">
+      <legend>{% trans "Settings" %}</legend>
+      {% include "partials/_form_errors.html" with form=quiz_form %}
+      {% for field in quiz_form %}
+        {% include "partials/_field.html" with field=field %}
+      {% endfor %}
+    </fieldset>
+
+    <h2>{% trans "Questions" %}</h2>
+
+    {% for question_form, choice_formset in choice_pairs %}
+      <fieldset class="question-block">
+        <legend>
+          {% if question_form.instance.pk %}
+            {% blocktrans with number=forloop.counter %}Question {{ number }}{% endblocktrans %}
+          {% else %}
+            {% trans "New question" %}
+          {% endif %}
+        </legend>
+        {{ choice_formset.management_form }}
+
+        {% if question_form.instance.pk %}
+          <div class="question-meta">
+            <div class="lesson-actions">
+              {# Reorder/delete submit the shared form below (form attribute). #}
+              <button type="submit" class="button-link"
+                      form="question-actions"
+                      formaction="{% url 'quizzes:question_move_up' course.pk question_form.instance.pk %}">
+                {% trans "Up" %}
+              </button>
+              <button type="submit" class="button-link"
+                      form="question-actions"
+                      formaction="{% url 'quizzes:question_move_down' course.pk question_form.instance.pk %}">
+                {% trans "Down" %}
+              </button>
+              <button type="submit" class="button-link button-link--danger"
+                      form="question-actions"
+                      formaction="{% url 'quizzes:question_delete' course.pk question_form.instance.pk %}">
+                {% trans "Delete" %}
+              </button>
+            </div>
+          </div>
+        {% endif %}
+
+        {{ question_form.id }}
+        {% include "partials/_field.html" with field=question_form.text %}
+
+        <table class="data-table choice-table">
+          <caption class="visually-hidden">{% trans "Choices for this question" %}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{% trans "Choice" %}</th>
+              <th scope="col">{% trans "Correct" %}</th>
+              <th scope="col">{% trans "Delete" %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for choice_form in choice_formset.forms %}
+              <tr>
+                <td>
+                  <label class="visually-hidden" for="{{ choice_form.text.id_for_label }}">{% trans "Choice text" %}</label>
+                  {{ choice_form.text }}
+                  {{ choice_form.id }}
+                  {% for error in choice_form.text.errors %}
+                    <p class="field-error" role="alert">{{ error }}</p>
+                  {% endfor %}
+                </td>
+                <td>
+                  <label class="visually-hidden" for="{{ choice_form.is_correct.id_for_label }}">{% trans "Correct" %}</label>
+                  {{ choice_form.is_correct }}
+                </td>
+                <td>
+                  {% if choice_form.instance.pk %}
+                    <label class="visually-hidden" for="{{ choice_form.DELETE.id_for_label }}">{% trans "Delete this choice" %}</label>
+                    {{ choice_form.DELETE }}
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% for error in choice_formset.non_form_errors %}
+          <p class="field-error" role="alert">{{ error }}</p>
+        {% endfor %}
+      </fieldset>
+    {% endfor %}
+
+    <div class="form-actions">
+      <button type="submit" class="button">{% trans "Save quiz" %}</button>
+      <a class="button button--secondary" href="{% url 'courses:course_detail' course.pk %}">
+        {% trans "Back to course" %}
+      </a>
+    </div>
+  </form>
+
+  {# Shared CSRF form targeted by the reorder/delete buttons above. #}
+  <form id="question-actions" method="post">{% csrf_token %}</form>
+</section>
+{% endblock %}

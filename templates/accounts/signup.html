@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Sign up" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="form-page">
+  <h1>{% trans "Create your account" %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% include "partials/_form_errors.html" %}
+    {% for field in form %}
+      {% include "partials/_field.html" %}
+    {% endfor %}
+    <button type="submit" class="button">{% trans "Sign up" %}</button>
+  </form>
+  <p>
+    {% trans "Already have an account?" %}
+    <a href="{% url 'accounts:login' %}">{% trans "Log in" %}</a>
+  </p>
+</section>
+{% endblock %}

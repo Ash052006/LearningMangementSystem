@@ -1,0 +1,121 @@
+/*
+ * Printable certificate and public verification page.
+ *
+ * Loaded only by the certificate template (via the extra_head block), so the
+ * rest of the site is untouched.  The sheet is designed to read well on screen
+ * and to stand alone on paper: the print block hides the site chrome and the
+ * on-screen actions, leaving only the certificate.
+ */
+
+.certificate {
+  margin: var(--space) 0;
+}
+
+.certificate-sheet {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 3rem 2.5rem;
+  border: 2px solid var(--colour-accent-dark);
+  border-radius: 0.5rem;
+  background: var(--colour-bg);
+  text-align: center;
+}
+
+.certificate-kicker {
+  margin: 0;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+  color: var(--colour-accent-dark);
+}
+
+.certificate-lead {
+  margin: 1.25rem 0 0;
+  color: var(--colour-muted);
+}
+
+.certificate-name {
+  margin: 0.25rem 0;
+  font-size: 2rem;
+}
+
+.certificate-course {
+  margin: 0.25rem 0 0;
+  font-size: 1.375rem;
+  font-weight: 600;
+}
+
+.certificate-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0 0;
+}
+
+.certificate-meta dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--colour-muted);
+}
+
+.certificate-meta dd {
+  margin: 0.15rem 0 0;
+  font-weight: 600;
+}
+
+.certificate-code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+.certificate-verify-note {
+  margin: 2rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--colour-muted);
+}
+
+.certificate-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.verify-status {
+  display: inline-block;
+  margin: 0.5rem 0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+}
+
+.verify-status--valid {
+  background: var(--colour-success-bg);
+  color: var(--colour-success-text);
+}
+
+.verify-status--invalid {
+  background: var(--colour-error-bg);
+  color: var(--colour-error-text);
+}
+
+.verify-course {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+@media print {
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .messages,
+  .certificate-actions {
+    display: none;
+  }
+
+  .certificate-sheet {
+    max-width: none;
+    border-color: #000000;
+  }
+}

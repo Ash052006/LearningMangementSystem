@@ -1,0 +1,23 @@
+# Version control and CI config are not needed inside the image.
+.git
+.github
+
+# Local virtual environments; the image installs from requirements.txt.
+.venv
+venv
+
+# Build/test artifacts and caches.
+__pycache__
+*.py[cod]
+.ruff_cache
+.coverage
+htmlcov
+staticfiles
+
+# Local state and secrets: never bake these into an image.
+.env
+db.sqlite3
+media
+
+# Docs are not required at runtime.
+*.md

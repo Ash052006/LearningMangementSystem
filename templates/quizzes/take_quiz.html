@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Quiz" %} — {{ course.title }} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="form-page form-page--wide">
+  <p class="breadcrumb">
+    {% if preview %}
+      <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
+    {% else %}
+      <a href="{% url 'courses:learner_course_detail' course.pk %}">{{ course.title }}</a>
+    {% endif %}
+  </p>
+
+  <h1>{% trans "Quiz" %}</h1>
+
+  {% if preview %}
+    <p class="notice notice--warning" role="alert">
+      {% trans "Preview mode: your answers are graded for you, but nothing is saved." %}
+    </p>
+  {% endif %}
+
+  <p class="meta">
+    {% blocktrans with mark=quiz.pass_mark %}Pass mark: {{ mark }}%{% endblocktrans %}
+  </p>
+
+  {# Each question is a radio group; no correctness information is sent here. #}
+  <form method="post">
+    {% csrf_token %}
+
+    {% for question in questions %}
+      {# The question is the group's legend, so screen readers announce it as
+         the group name rather than as a bare paragraph. #}
+      <fieldset class="question-block">
+        <legend>
+          {% blocktrans with number=forloop.counter %}Question {{ number }}:{% endblocktrans %}
+          {{ question.text }}
+        </legend>
+        {% for choice in question.choices.all %}
+          <div class="choice-option">
+            <input type="radio" name="question_{{ question.pk }}" value="{{ choice.pk }}"
+                   id="choice-{{ choice.pk }}">
+            <label for="choice-{{ choice.pk }}">{{ choice.text }}</label>
+          </div>
+        {% endfor %}
+      </fieldset>
+    {% endfor %}
+
+    <div class="form-actions">
+      <button type="submit" class="button">{% trans "Submit answers" %}</button>
+      {% if preview %}
+        <a class="button button--secondary" href="{% url 'courses:course_detail' course.pk %}">
+          {% trans "Cancel" %}
+        </a>
+      {% else %}
+        <a class="button button--secondary" href="{% url 'courses:learner_course_detail' course.pk %}">
+          {% trans "Cancel" %}
+        </a>
+      {% endif %}
+    </div>
+  </form>
+</section>
+{% endblock %}

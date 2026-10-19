@@ -1,0 +1,80 @@
+{% load i18n static %}
+<!DOCTYPE html>
+{# LANGUAGE_CODE comes from the i18n context processor, so <html lang> follows #}
+{# the active language instead of being hardcoded. #}
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% trans "Staff training" %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  {# Skip link must be the first focusable element on the page. #}
+  <a class="skip-link" href="#main-content">{% trans "Skip to main content" %}</a>
+
+  <header class="site-header">
+    <nav class="site-nav" aria-label="{% trans 'Main navigation' %}">
+      <a class="site-brand" href="{% url 'home' %}">{% trans "Staff training" %}</a>
+      <ul class="nav-links">
+        {% if user.is_authenticated %}
+          {% if user.is_instructor %}
+            <li><a href="{% url 'accounts:dashboard' %}">{% trans "Dashboard" %}</a></li>
+            <li><a href="{% url 'courses:instructor_course_list' %}">{% trans "My courses" %}</a></li>
+          {% else %}
+            <li><a href="{% url 'courses:catalogue' %}">{% trans "Catalogue" %}</a></li>
+            <li><a href="{% url 'courses:my_courses' %}">{% trans "My courses" %}</a></li>
+          {% endif %}
+          <li class="nav-user">{{ user.get_username }}</li>
+          <li>
+            {# Logout is a state change: POST only, with CSRF token. #}
+            <form method="post" action="{% url 'accounts:logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="button-link">{% trans "Log out" %}</button>
+            </form>
+          </li>
+        {% else %}
+          <li><a href="{% url 'accounts:login' %}">{% trans "Log in" %}</a></li>
+          <li><a href="{% url 'accounts:signup' %}">{% trans "Sign up" %}</a></li>
+        {% endif %}
+        {# Changing the language is a state change (it sets a cookie), so it #}
+        {# posts to Django's set_language view rather than using a link. #}
+        <li>
+          {% get_available_languages as LANGUAGES %}
+          {% get_current_language as CURRENT_LANGUAGE %}
+          <form method="post" action="{% url 'set_language' %}" class="language-switcher">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path|default:'/' }}">
+            <label for="language-code" class="visually-hidden">{% trans "Language" %}</label>
+            <select name="language" id="language-code">
+              {% for code, name in LANGUAGES %}
+                <option value="{{ code }}" {% if code == CURRENT_LANGUAGE %}selected{% endif %}>{{ name }}</option>
+              {% endfor %}
+            </select>
+            <button type="submit" class="button-link">{% trans "Go" %}</button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  {# tabindex="-1" lets the skip link move focus here, not just scroll. #}
+  <main id="main-content" class="site-main" tabindex="-1">
+    {% if messages %}
+      {# aria-live so assistive tech announces flash messages after load. #}
+      <ul class="messages" role="status" aria-live="polite">
+        {% for message in messages %}
+          <li class="message {{ message.tags|default:'info' }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>{% trans "Internal staff training" %}</p>
+  </footer>
+</body>
+</html>

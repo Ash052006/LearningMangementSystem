@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "My courses" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section>
+  <div class="page-heading">
+    <h1>{% trans "My courses" %}</h1>
+    <a class="button" href="{% url 'courses:course_create' %}">{% trans "New course" %}</a>
+  </div>
+
+  {% if courses %}
+    <table class="data-table">
+      <caption class="visually-hidden">{% trans "Your courses and their status" %}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{% trans "Title" %}</th>
+          <th scope="col">{% trans "Status" %}</th>
+          <th scope="col">{% trans "Lessons" %}</th>
+          <th scope="col">{% trans "Actions" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+          <tr>
+            <td>
+              <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
+            </td>
+            <td>{% include "courses/instructor/_status_badge.html" %}</td>
+            <td>{{ course.lesson_count }}</td>
+            {# Hidden course name gives each repeated action a distinct name. #}
+            <td class="actions">
+              <a href="{% url 'courses:course_edit' course.pk %}">
+                {% trans "Edit" %}<span class="visually-hidden"> {{ course.title }}</span>
+              </a>
+              <form method="post" action="{% url 'courses:course_toggle_publish' course.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="button-link">
+                  {% if course.is_published %}{% trans "Unpublish" %}{% else %}{% trans "Publish" %}{% endif %}
+                  <span class="visually-hidden"> {{ course.title }}</span>
+                </button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>{% trans "You have not created any courses yet." %}</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Delete course" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="form-page">
+  <h1>{% trans "Delete course" %}</h1>
+  <p>
+    {% blocktrans with title=course.title %}
+      Are you sure you want to delete "{{ title }}"? Its lessons will be
+      removed too.
+    {% endblocktrans %}
+  </p>
+  {# Confirmation is a GET page; the delete itself is POST only. #}
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-actions">
+      <button type="submit" class="button button--danger">{% trans "Delete course" %}</button>
+      <a class="button button--secondary" href="{% url 'courses:course_detail' course.pk %}">
+        {% trans "Cancel" %}
+      </a>
+    </div>
+  </form>
+</section>
+{% endblock %}

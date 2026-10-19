@@ -1,0 +1,22 @@
+# Coverage is scoped to this project's own code: without a ``source`` it would
+# also walk site-packages (and, locally, .venv) and drown the report.
+
+[run]
+source =
+    accounts
+    courses
+    quizzes
+    api
+    config
+omit =
+    */migrations/*
+    manage.py
+    */tests.py
+    */asgi.py
+    */wsgi.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    if TYPE_CHECKING:
+    raise NotImplementedError

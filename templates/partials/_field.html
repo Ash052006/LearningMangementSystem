@@ -1,0 +1,12 @@
+{% comment %}
+Renders one form field: label, widget, help text and field errors.
+
+help_text is developer-controlled (never user input) - Django's own form
+templates also render it with |safe so hints keep their list markup.
+{% endcomment %}
+<div class="form-field">
+  {{ field.label_tag }}
+  {{ field }}
+  {% if field.help_text %}<p class="help-text">{{ field.help_text|safe }}</p>{% endif %}
+  {% for error in field.errors %}<p class="field-error" role="alert">{{ error }}</p>{% endfor %}
+</div>

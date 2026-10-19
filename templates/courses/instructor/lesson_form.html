@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+  {% if object %}{% trans "Edit lesson" %}{% else %}{% trans "New lesson" %}{% endif %} — {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<section class="form-page">
+  <p class="breadcrumb">
+    <a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a>
+  </p>
+  <h1>{% if object %}{% trans "Edit lesson" %}{% else %}{% trans "New lesson" %}{% endif %}</h1>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include "partials/_form_errors.html" %}
+    {% for field in form %}
+      {% include "partials/_field.html" %}
+    {% endfor %}
+    <div class="form-actions">
+      <button type="submit" class="button">{% trans "Save lesson" %}</button>
+      <a class="button button--secondary" href="{% url 'courses:course_detail' course.pk %}">
+        {% trans "Cancel" %}
+      </a>
+    </div>
+  </form>
+</section>
+{% endblock %}

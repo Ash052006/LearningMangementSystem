@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Server error" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="error-page">
+  <h1>{% trans "Server error" %}</h1>
+  <p>{% trans "Something went wrong. Please try again later." %}</p>
+  <p><a href="{% url 'home' %}">{% trans "Go to the home page" %}</a></p>
+</section>
+{% endblock %}

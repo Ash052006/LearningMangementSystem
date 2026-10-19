@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Log in" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section class="form-page">
+  <h1>{% trans "Log in" %}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% include "partials/_form_errors.html" %}
+    {% for field in form %}
+      {% include "partials/_field.html" %}
+    {% endfor %}
+    {# carry a safe ?next= through the POST; the view revalidates it #}
+    {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+    <button type="submit" class="button">{% trans "Log in" %}</button>
+  </form>
+  <p>
+    {% trans "No account yet?" %}
+    <a href="{% url 'accounts:signup' %}">{% trans "Sign up" %}</a>
+  </p>
+</section>
+{% endblock %}

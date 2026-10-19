@@ -1,0 +1,17 @@
+{% load i18n %}
+{% comment %}
+Progress for one course; expects `progress` with completed/total/percent.
+A native <progress> element conveys the value to assistive tech; the adjacent
+text gives the same figure in words.  Pass `progress_label` when several bars
+appear on one page (e.g. the "my courses" list) so each has a distinct name.
+{% endcomment %}
+{% trans "Course progress" as default_label %}
+{% if progress.total %}
+  <div class="progress">
+    <progress class="progress-bar" max="{{ progress.total }}" value="{{ progress.completed }}"
+              aria-label="{{ progress_label|default:default_label }}"></progress>
+    <p class="progress-text">{% blocktrans with completed=progress.completed total=progress.total percent=progress.percent %}{{ completed }} of {{ total }} lessons done ({{ percent }}%){% endblocktrans %}</p>
+  </div>
+{% else %}
+  <p class="progress-text">{% trans "No lessons yet." %}</p>
+{% endif %}

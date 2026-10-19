@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "My courses" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section>
+  <h1>{% trans "My courses" %}</h1>
+
+  {% if enrollments %}
+    <ul class="course-cards">
+      {% for enrollment in enrollments %}
+        <li class="course-card">
+          <h2>
+            <a href="{% url 'courses:learner_course_detail' enrollment.course.pk %}">
+              {{ enrollment.course.title }}
+            </a>
+          </h2>
+          {% include "courses/_progress.html" with progress=enrollment.progress progress_label=enrollment.course.title %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>
+      {% trans "You are not enrolled in any courses yet." %}
+      <a href="{% url 'courses:catalogue' %}">{% trans "Browse the catalogue" %}</a>.
+    </p>
+  {% endif %}
+</section>
+{% endblock %}

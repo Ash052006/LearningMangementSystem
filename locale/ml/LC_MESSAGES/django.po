@@ -1,0 +1,1278 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PUCAR LMS 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-19 14:18+0000\n"
+"PO-Revision-Date: 2026-10-19 19:48+0000\n"
+"Last-Translator: PUCAR LMS draft <draft@localhost>\n"
+"Language-Team: Malayalam <ml@li.org>\n"
+"Language: ml\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/admin.py:18 accounts/admin.py:22
+msgid "LMS"
+msgstr "എൽഎംഎസ്"
+
+#: accounts/models.py:19 courses/forms.py:41
+msgid "Instructor"
+msgstr "പരിശീലകൻ"
+
+#: accounts/models.py:20 templates/courses/instructor/course_dashboard.html:33
+msgid "Learner"
+msgstr "വിദ്യാർത്ഥി"
+
+#: accounts/models.py:23
+msgid "role"
+msgstr "റോൾ"
+
+#: accounts/models.py:30 courses/models.py:129
+msgid "user"
+msgstr "ഉപയോക്താവ്"
+
+#: accounts/models.py:31
+msgid "users"
+msgstr "ഉപയോക്താക്കൾ"
+
+#: accounts/views.py:47
+msgid "Your account has been created. Please log in."
+msgstr "നിങ്ങളുടെ അക്കൗണ്ട് സൃഷ്ടിച്ചു. ദയവായി ലോഗിൻ ചെയ്യൂ."
+
+#: accounts/views.py:63
+#, python-format
+msgid "Welcome back, %(username)s."
+msgstr "വീണ്ടും സ്വാഗതം, %(username)s."
+
+#: courses/admin.py:58 courses/models.py:103
+msgid "lessons"
+msgstr "പാഠങ്ങൾ"
+
+#: courses/admin.py:63
+msgid "enrolments"
+msgstr "രജിസ്ട്രേഷനുകൾ"
+
+#: courses/forms.py:20
+msgid "Newest first"
+msgstr "ഏറ്റവും പുതിയത് ആദ്യം"
+
+#: courses/forms.py:21
+msgid "Title (A–Z)"
+msgstr "തലക്കെട്ട് (A–Z)"
+
+#: courses/forms.py:35
+msgid "Search"
+msgstr "തിരയുക"
+
+#: courses/forms.py:38
+msgid "Matches the course title or description."
+msgstr "കോഴ്സിന്റെ തലക്കെട്ട് അല്ലെങ്കിൽ വിവരണവുമായി പൊരുത്തപ്പെടുന്നു."
+
+#: courses/forms.py:43
+msgid "All instructors"
+msgstr "എല്ലാ പരിശീലകരും"
+
+#: courses/forms.py:47
+msgid "Sort by"
+msgstr "ക്രമീകരിക്കുക"
+
+#: courses/forms.py:61
+msgid "Enforce order"
+msgstr "ക്രമം നിർബന്ധമാക്കുക"
+
+#: courses/forms.py:63
+msgid "Learners must complete the lessons in order."
+msgstr "വിദ്യാർത്ഥികൾ പാഠങ്ങൾ ക്രമത്തിൽ മാത്രമേ പൂർത്തിയാക്കാൻ പാടൂ."
+
+#: courses/forms.py:78
+msgid "Video URL"
+msgstr "വീഡിയോ URL"
+
+#: courses/models.py:23 templates/courses/instructor/_status_badge.html:7
+msgid "Draft"
+msgstr "കരട്"
+
+#: courses/models.py:24 templates/courses/instructor/_status_badge.html:5
+msgid "Published"
+msgstr "പ്രസിദ്ധീകരിച്ചത്"
+
+#: courses/models.py:33
+msgid "instructor"
+msgstr "പരിശീലകൻ"
+
+#: courses/models.py:35 courses/models.py:78
+msgid "title"
+msgstr "തലക്കെട്ട്"
+
+#: courses/models.py:36
+msgid "description"
+msgstr "വിവരണം"
+
+#: courses/models.py:38
+msgid "status"
+msgstr "സ്ഥിതി"
+
+#: courses/models.py:46
+msgid "enforce order"
+msgstr "ക്രമം നിർബന്ധമാക്കൽ"
+
+#: courses/models.py:47
+msgid "created at"
+msgstr "സൃഷ്ടിച്ച സമയം"
+
+#: courses/models.py:48
+msgid "updated at"
+msgstr "പുതുക്കിയ സമയം"
+
+#: courses/models.py:52 courses/models.py:76 courses/models.py:135
+#: quizzes/models.py:21
+msgid "course"
+msgstr "കോഴ്സ്"
+
+#: courses/models.py:53
+msgid "courses"
+msgstr "കോഴ്സുകൾ"
+
+#: courses/models.py:79
+msgid "content"
+msgstr "ഉള്ളടക്കം"
+
+#: courses/models.py:80
+msgid "video URL"
+msgstr "വീഡിയോ URL"
+
+#: courses/models.py:82
+msgid "attachment"
+msgstr "അറ്റാച്ചുമെന്റ്"
+
+#: courses/models.py:87
+msgid "Optional file, maximum 10 MB: PDF, Office document, image or zip."
+msgstr "ഓപ്ഷണൽ ഫയൽ, പരമാവധി 10 MB: PDF, ഒഫീസ് രേഖ, ചിത്രം അല്ലെങ്കിൽ സിപ്പ്."
+
+#: courses/models.py:92 quizzes/models.py:70
+msgid "position"
+msgstr "സ്ഥാനം"
+
+#: courses/models.py:102 courses/models.py:166
+msgid "lesson"
+msgstr "പാഠം"
+
+#: courses/models.py:137
+msgid "enrolled at"
+msgstr "ചേർന്ന സമയം"
+
+#: courses/models.py:146 courses/models.py:160 courses/models.py:209
+#: quizzes/models.py:115
+msgid "enrollment"
+msgstr "രജിസ്ട്രേഷൻ"
+
+#: courses/models.py:147
+msgid "enrollments"
+msgstr "രജിസ്ട്രേഷനുകൾ"
+
+#: courses/models.py:168
+msgid "completed at"
+msgstr "പൂർത്തിയാക്കിയ സമയം"
+
+#: courses/models.py:177
+msgid "lesson progress"
+msgstr "പാഠപുരോഗതി"
+
+#: courses/models.py:178
+msgid "lesson progress records"
+msgstr "പാഠ പുരോഗതി രേഖകൾ"
+
+#: courses/models.py:189
+msgid "Lesson does not belong to this enrolment's course."
+msgstr "ഈ പാഠം ഈ രജിസ്ട്രേഷന്റെ കോഴ്സിന്റെതല്ല."
+
+#: courses/models.py:213
+msgid "code"
+msgstr "കോഡ്"
+
+#: courses/models.py:214
+msgid "issued at"
+msgstr "നൽകിയ സമയം"
+
+#: courses/models.py:218
+msgid "certificate"
+msgstr "സർട്ടിഫിക്കറ്റ്"
+
+#: courses/models.py:219
+msgid "certificates"
+msgstr "സർട്ടിഫിക്കറ്റുകൾ"
+
+#: courses/validators.py:60
+msgid "Enter a video URL starting with http:// or https://."
+msgstr "http:// അല്ലെങ്കിൽ https:// എന്ന് തുടങ്ങുന്ന ഒരു വീഡിയോ URL നൽകൂ."
+
+#: courses/validators.py:70
+#, python-format
+msgid "Attachment must be %(max_mb).0f MB or smaller."
+msgstr "അറ്റാച്ചുമെന്റ് %(max_mb).0f MB അല്ലെങ്കിൽ അതിൽ ചെറുതായിരിക്കണം."
+
+#: courses/validators.py:81
+#, python-format
+msgid "Unsupported file type '%(ext)s'. Allowed: %(allowed)s."
+msgstr "പിന്തുണയ്ക്കാത്ത ഫയൽ തരം '%(ext)s'. അനുവദനീയം: %(allowed)s."
+
+#: courses/views.py:249
+msgid "Username"
+msgstr "ഉപയോക്തൃനാമം"
+
+#: courses/views.py:250
+msgid "Enrolled at"
+msgstr "ചേർന്ന തീയതി"
+
+#: courses/views.py:251
+msgid "Lessons completed"
+msgstr "പൂർത്തിയാക്കിയ പാഠങ്ങൾ"
+
+#: courses/views.py:252
+msgid "Total lessons"
+msgstr "ആകെ പാഠങ്ങൾ"
+
+#: courses/views.py:253
+msgid "Progress (%)"
+msgstr "പുരോഗതി (%)"
+
+#: courses/views.py:254
+msgid "Best quiz (%)"
+msgstr "മികച്ച ക്വിസ് (%)"
+
+#: courses/views.py:255 templates/courses/instructor/course_dashboard.html:38
+#: templates/quizzes/quiz_result.html:25 templates/quizzes/quiz_result.html:59
+msgid "Passed"
+msgstr "പാസായി"
+
+#: courses/views.py:256 templates/courses/instructor/course_dashboard.html:39
+msgid "Attempts"
+msgstr "ശ്രമങ്ങൾ"
+
+#: courses/views.py:271 templates/courses/instructor/course_dashboard.html:56
+msgid "Yes"
+msgstr "അതെ"
+
+#: courses/views.py:271 templates/courses/instructor/course_dashboard.html:56
+msgid "No"
+msgstr "അല്ല"
+
+#: courses/views.py:291
+#, python-format
+msgid "Course \"%(title)s\" created."
+msgstr "കോഴ്സ് \"%(title)s\" സൃഷ്ടിച്ചു."
+
+#: courses/views.py:316
+#, python-format
+msgid "Course \"%(title)s\" updated."
+msgstr "കോഴ്സ് \"%(title)s\" പുതുക്കി."
+
+#: courses/views.py:337
+msgid ""
+"This course cannot be deleted because its quiz has already been answered by "
+"a learner."
+msgstr "ഒരു വിദ്യാർത്ഥി ഇതിനകം ഈ കോഴ്സിന്റെ ക്വിസിന് ഉത്തരം നൽകിയതിനാൽ ഈ കോഴ്സ് ഇല്ലാതാക്കാൻ കഴിയില്ല."
+
+#: courses/views.py:343
+#, python-format
+msgid "Course \"%(title)s\" deleted."
+msgstr "കോഴ്സ് \"%(title)s\" ഇല്ലാതാക്കി."
+
+#: courses/views.py:358
+msgid "Add at least one lesson before publishing this course."
+msgstr "ഈ കോഴ്സ് പ്രസിദ്ധീകരിക്കുന്നതിന് മുമ്പ് കുറഞ്ഞത് ഒരു പാഠം ചേരൂ."
+
+#: courses/views.py:364
+#, python-format
+msgid "Course \"%(title)s\" published."
+msgstr "കോഴ്സ് \"%(title)s\" പ്രസിദ്ധീകരിച്ചു."
+
+#: courses/views.py:372
+msgid ""
+"The quiz will not be shown to learners until it has at least one question."
+msgstr "കുറഞ്ഞത് ഒരു ചോദ്യമെങ്കിലും ഉള്ളതുവരെ ക്വിസ് വിദ്യാർത്ഥികൾക്ക് കാണിക്കില്ല."
+
+#: courses/views.py:379
+#, python-format
+msgid "Course \"%(title)s\" unpublished."
+msgstr "കോഴ്സ് \"%(title)s\" പിൻവലിച്ചു."
+
+#: courses/views.py:419
+#, python-format
+msgid "Lesson \"%(title)s\" added."
+msgstr "പാഠം \"%(title)s\" ചേർത്തു."
+
+#: courses/views.py:440
+#, python-format
+msgid "Lesson \"%(title)s\" updated."
+msgstr "പാഠം \"%(title)s\" പുതുക്കി."
+
+#: courses/views.py:462
+#, python-format
+msgid "Lesson \"%(title)s\" deleted."
+msgstr "പാഠം \"%(title)s\" ഇല്ലാതാക്കി."
+
+#: courses/views.py:478
+#, python-format
+msgid "Lesson \"%(title)s\" moved %(direction)s."
+msgstr "പാഠം \"%(title)s\" %(direction)s മാറ്റി."
+
+#: courses/views.py:484
+#, python-format
+msgid "Lesson \"%(title)s\" is already at the %(edge)s."
+msgstr "പാഠം \"%(title)s\" ഇതിനകം തന്നെ %(edge)s ആണ്."
+
+#: courses/views.py:487 quizzes/views.py:178
+msgid "top"
+msgstr "മുകളിൽ"
+
+#: courses/views.py:487 quizzes/views.py:178
+msgid "bottom"
+msgstr "താഴെ"
+
+#: courses/views.py:538
+#, python-format
+msgid "You are enrolled in \"%(title)s\"."
+msgstr "നിങ്ങൾ \"%(title)s\" കോഴ്സിൽ ചേർന്നു."
+
+#: courses/views.py:639
+msgid "Finish every lesson and pass the quiz to earn your certificate."
+msgstr "സർട്ടിഫിക്കറ്റ് നേടാൻ എല്ലാ പാഠങ്ങളും പൂർത്തിയാക്കി ക്വിസിൽ പാസാകൂ."
+
+#: courses/views.py:642
+msgid "Your certificate is ready."
+msgstr "നിങ്ങളുടെ സർട്ടിഫിക്കറ്റ് തയ്യാറാണ്."
+
+#: courses/views.py:707
+msgid "Enrol in this course to open its lessons."
+msgstr "പാഠങ്ങൾ തുറക്കാൻ ഈ കോഴ്സിൽ ചേരൂ."
+
+#: courses/views.py:727 courses/views.py:773
+#, python-format
+msgid "Complete \"%(title)s\" first, then this lesson will unlock."
+msgstr "ആദ്യം \"%(title)s\" പൂർത്തിയാക്കൂ, പിന്നീട് ഈ പാഠം തുറക്കും."
+
+#: courses/views.py:730
+msgid "This lesson is locked."
+msgstr "ഈ പാഠം പൂട്ടിയിരിക്കുന്നു."
+
+#: courses/views.py:781
+#, python-format
+msgid "Lesson \"%(title)s\" marked complete."
+msgstr "പാഠം \"%(title)s\" പൂർത്തിയായി അടയാളപ്പെടുത്തി."
+
+#: courses/views.py:784
+msgid "You have already completed this lesson."
+msgstr "നിങ്ങൾ ഈ പാഠം ഇതിനകം പൂർത്തിയാക്കിയിട്ടുണ്ട്."
+
+#: quizzes/forms.py:79
+#, python-format
+msgid "A question must have between %(min)d and %(max)d choices."
+msgstr "ഒരു ചോദ്യത്തിൽ %(min)d മുതൽ %(max)d വരെ ഓപ്ഷനുകൾ ഉണ്ടായിരിക്കണം."
+
+#: quizzes/forms.py:84
+msgid "Mark exactly one choice as correct."
+msgstr "ഒരു ഓപ്ഷൻ മാത്രം ശരിയായി അടയാളപ്പെടുത്തൂ."
+
+#: quizzes/models.py:24
+msgid "pass mark"
+msgstr "പാസ് മാർക്ക്"
+
+#: quizzes/models.py:27
+msgid "Minimum percentage required to pass."
+msgstr "ഉറൂടാൻ ആവശ്യമായ കുറഞ്ഞ ശതമാനം."
+
+#: quizzes/models.py:31
+msgid "maximum attempts"
+msgstr "പരമാവധി ശ്രമങ്ങൾ"
+
+#: quizzes/models.py:34
+msgid "Leave blank for unlimited attempts."
+msgstr "അനന്തമായ ശ്രമങ്ങൾക്ക് ശൂന്യമായി വിടുക."
+
+#: quizzes/models.py:37
+msgid "show answers"
+msgstr "ഉത്തരങ്ങൾ കാണിക്കുക"
+
+#: quizzes/models.py:39
+msgid "Show the correct answers to learners after each attempt."
+msgstr "ഓരോ ശ്രമത്തിനും ശേഷം വിദ്യാർത്ഥികൾക്ക് ശരിയായ ഉത്തരങ്ങൾ കാണിക്കുക."
+
+#: quizzes/models.py:43 quizzes/models.py:67 quizzes/models.py:121
+msgid "quiz"
+msgstr "ക്വിസ്"
+
+#: quizzes/models.py:44
+msgid "quizzes"
+msgstr "ക്വിസുകൾ"
+
+#: quizzes/models.py:47 templates/courses/instructor/course_detail.html:70
+#: templates/quizzes/quiz_edit.html:4 templates/quizzes/quiz_edit.html:11
+#: templates/quizzes/take_quiz.html:4 templates/quizzes/take_quiz.html:16
+msgid "Quiz"
+msgstr "ക്വിസ്"
+
+#: quizzes/models.py:69 quizzes/models.py:90
+msgid "text"
+msgstr "വാചകം"
+
+#: quizzes/models.py:74 quizzes/models.py:88 quizzes/models.py:158
+msgid "question"
+msgstr "ചോദ്യം"
+
+#: quizzes/models.py:75
+msgid "questions"
+msgstr "ചോദ്യങ്ങൾ"
+
+#: quizzes/models.py:91
+msgid "is correct"
+msgstr "ശരിയാണ്"
+
+#: quizzes/models.py:101
+msgid "choice"
+msgstr "ഓപ്ഷൻ"
+
+#: quizzes/models.py:102
+msgid "choices"
+msgstr "ഓപ്ഷനുകൾ"
+
+#: quizzes/models.py:123
+msgid "score"
+msgstr "സ്കോർ"
+
+#: quizzes/models.py:124
+msgid "total"
+msgstr "ആകെ"
+
+#: quizzes/models.py:126
+msgid "percent"
+msgstr "ശതമാനം"
+
+#: quizzes/models.py:131
+msgid "passed"
+msgstr "പാസായി"
+
+#: quizzes/models.py:132
+msgid "submitted at"
+msgstr "സമർപ്പിച്ച സമയം"
+
+#: quizzes/models.py:136
+msgid "quiz attempt"
+msgstr "ക്വിസ് ശ്രമം"
+
+#: quizzes/models.py:137
+msgid "quiz attempts"
+msgstr "ക്വിസ് ശ്രമങ്ങൾ"
+
+#: quizzes/models.py:150
+msgid "attempt"
+msgstr "ശ്രമം"
+
+#: quizzes/models.py:169
+msgid "selected choice"
+msgstr "തിരഞ്ഞെടുത്ത ഓപ്ഷൻ"
+
+#: quizzes/models.py:179
+msgid "attempt answer"
+msgstr "ശ്രമ ഉത്തരം"
+
+#: quizzes/models.py:180
+msgid "attempt answers"
+msgstr "ശ്രമ ഉത്തരങ്ങൾ"
+
+#: quizzes/models.py:183
+msgid "no answer"
+msgstr "ഉത്തരമില്ല"
+
+#: quizzes/views.py:119
+msgid "Enter the question text."
+msgstr "ചോദ്യത്തിന്റെ വാചകം നൽകൂ."
+
+#: quizzes/views.py:133
+#, python-format
+msgid "Quiz for \"%(title)s\" saved."
+msgstr "\"%(title)s\" എന്നതിനുള്ള ക്വിസ് സംരക്ഷിച്ചു."
+
+#: quizzes/views.py:137
+msgid "Please correct the errors below."
+msgstr "താഴെയുള്ള പിശകുകൾ ശരിയാക്കൂ."
+
+#: quizzes/views.py:173
+msgid "Question order updated."
+msgstr "ചോദ്യ ക്രമം പുതുക്കി."
+
+#: quizzes/views.py:177
+#, python-format
+msgid "That question is already at the %(edge)s."
+msgstr "ആ ചോദ്യം ഇതിനകം തന്നെ %(edge)s ആണ്."
+
+#: quizzes/views.py:212
+msgid ""
+"This question cannot be deleted because learners have already answered it."
+msgstr "വിദ്യാർത്ഥികൾ ഇതിനകം ഇതിന് ഉത്തരം നൽകിയതിനാൽ ഈ ചോദ്യം ഇല്ലാതാക്കാൻ കഴിയില്ല."
+
+#: quizzes/views.py:220
+msgid "Question deleted."
+msgstr "ചോദ്യം ഇല്ലാതാക്കി."
+
+#: quizzes/views.py:337
+msgid "You have no attempts left for this quiz."
+msgstr "ഈ ക്വിസിന് നിങ്ങൾക്ക് ഒരു ശ്രമവും ബാക്കിയില്ല."
+
+#: quizzes/views.py:350
+msgid "You have used all of your attempts for this quiz."
+msgstr "ഈ ക്വിസിനുള്ള എല്ലാ ശ്രമങ്ങളും നിങ്ങൾ ഉപയോഗിച്ചു."
+
+#: quizzes/views.py:356
+msgid "Your answers have been submitted."
+msgstr "നിങ്ങളുടെ ഉത്തരങ്ങൾ സമർപ്പിച്ചു."
+
+#: templates/403.html:4 templates/403.html:8
+msgid "Not allowed"
+msgstr "അനുവദിച്ചിട്ടില്ല"
+
+#: templates/403.html:9
+msgid "You do not have permission to view this page."
+msgstr "ഈ പേജ് കാണാൻ നിങ്ങൾക്ക് അനുമതിയില്ല."
+
+#: templates/403.html:10 templates/404.html:10 templates/500.html:10
+msgid "Go to the home page"
+msgstr "ഹോം പേജിലേക്ക് പോകൂ"
+
+#: templates/404.html:4 templates/404.html:8
+msgid "Page not found"
+msgstr "പേജ് കണ്ടെത്തിയില്ല"
+
+#: templates/404.html:9
+msgid "The page you requested does not exist."
+msgstr "നിങ്ങൾ ആവശ്യപ്പെട്ട പേജ് നിലവിലില്ല."
+
+#: templates/500.html:4 templates/500.html:8
+msgid "Server error"
+msgstr "സെർവർ പിശക്"
+
+#: templates/500.html:9
+msgid "Something went wrong. Please try again later."
+msgstr "എവിടെയോ പിശക് സംഭവിച്ചു. പിന്നീട് വീണ്ടും ശ്രമിക്കൂ."
+
+#: templates/accounts/dashboard.html:4 templates/accounts/dashboard.html:8
+#: templates/base.html:23 templates/courses/instructor/course_dashboard.html:9
+#: templates/courses/instructor/dashboard.html:4
+#: templates/courses/instructor/dashboard.html:9
+msgid "Dashboard"
+msgstr "ഡാഷ്‌ബോർഡ്"
+
+#: templates/accounts/dashboard.html:11
+msgid "Course analytics"
+msgstr "കോഴ്സ് വിശകലനം"
+
+#: templates/accounts/dashboard.html:14
+msgid "Manage my courses"
+msgstr "എന്റെ കോഴ്സുകൾ കൈകാര്യം ചെയ്യുക"
+
+#: templates/accounts/login.html:4 templates/accounts/login.html:8
+#: templates/accounts/login.html:17 templates/accounts/signup.html:19
+#: templates/base.html:38
+msgid "Log in"
+msgstr "ലോഗിൻ ചെയ്യുക"
+
+#: templates/accounts/login.html:20
+msgid "No account yet?"
+msgstr "ഇതുവരെ അക്കൗണ്ട് ഇല്ലേ?"
+
+#: templates/accounts/login.html:21 templates/accounts/signup.html:4
+#: templates/accounts/signup.html:15 templates/base.html:39
+msgid "Sign up"
+msgstr "രജിസ്റ്റർ ചെയ്യുക"
+
+#: templates/accounts/signup.html:8
+msgid "Create your account"
+msgstr "നിങ്ങളുടെ അക്കൗണ്ട് സൃഷ്ടിക്കുക"
+
+#: templates/accounts/signup.html:18
+msgid "Already have an account?"
+msgstr "ഇതിനകം അക്കൗണ്ട് ഉണ്ടോ?"
+
+#: templates/base.html:9 templates/base.html:19
+msgid "Staff training"
+msgstr "ജീവനക്കാരുടെ പരിശീലനം"
+
+#: templates/base.html:15
+msgid "Skip to main content"
+msgstr "പ്രധാന ഉള്ളടക്കത്തിലേക്ക് പോകൂ"
+
+#: templates/base.html:18
+msgid "Main navigation"
+msgstr "പ്രധാന നാവിഗേഷൻ"
+
+#: templates/base.html:24 templates/base.html:27
+#: templates/courses/catalogue.html:10
+#: templates/courses/instructor/course_detail.html:9
+#: templates/courses/instructor/course_list.html:4
+#: templates/courses/instructor/course_list.html:9
+#: templates/courses/my_courses.html:4 templates/courses/my_courses.html:8
+msgid "My courses"
+msgstr "എന്റെ കോഴ്സുകൾ"
+
+#: templates/base.html:26
+msgid "Catalogue"
+msgstr "കാറ്റലോഗ്"
+
+#: templates/base.html:34
+msgid "Log out"
+msgstr "ലോഗൗട്ട് ചെയ്യുക"
+
+#: templates/base.html:49
+msgid "Language"
+msgstr "ഭാഷ"
+
+#: templates/base.html:55
+msgid "Go"
+msgstr "പോകുക"
+
+#: templates/base.html:77
+msgid "Internal staff training"
+msgstr "ആന്തരിക ജീവനക്കാരുടെ പരിശീലനം"
+
+#: templates/courses/_progress.html:8
+msgid "Course progress"
+msgstr "കോഴ്സ് പുരോഗതി"
+
+#: templates/courses/_progress.html:13
+#, python-format
+msgid "%(completed)s of %(total)s lessons done (%(percent)s%%)"
+msgstr "ആകെ %(total)s പാഠങ്ങളിൽ %(completed)s പൂർത്തിയായി (%(percent)s%%)"
+
+#: templates/courses/_progress.html:16
+msgid "No lessons yet."
+msgstr "ഇതുവരെ പാഠങ്ങളില്ല."
+
+#: templates/courses/catalogue.html:4 templates/courses/catalogue.html:9
+#: templates/courses/course_detail.html:9
+msgid "Course catalogue"
+msgstr "കോഴ്സ് കാറ്റലോഗ്"
+
+#: templates/courses/catalogue.html:14
+msgid "Search and filter courses"
+msgstr "കോഴ്സുകൾ തിരയുകയും ഫിൽട്ടർ ചെയ്യുകയും ചെയ്യുക"
+
+#: templates/courses/catalogue.html:19
+msgid "Filter"
+msgstr "ഫിൽട്ടർ"
+
+#: templates/courses/catalogue.html:20
+msgid "Clear"
+msgstr "മായ്ക്കുക"
+
+#: templates/courses/catalogue.html:32 templates/courses/course_detail.html:14
+#, python-format
+msgid "Instructor: %(name)s"
+msgstr "പരിശീലകൻ: %(name)s"
+
+#: templates/courses/catalogue.html:35
+#, python-format
+msgid "%(n)s lesson"
+msgid_plural "%(n)s lessons"
+msgstr[0] "%(n)s പാഠം"
+msgstr[1] "%(n)s പാഠങ്ങൾ"
+
+#: templates/courses/catalogue.html:43
+msgid "No published courses match your search or filters."
+msgstr "നിങ്ങളുടെ തിരച്ചിലിനോ ഫിൽട്ടറിനോ പൊരുത്തപ്പെടുന്ന പ്രസിദ്ധീകരിച്ച കോഴ്സുകളില്ല."
+
+#: templates/courses/catalogue.html:45
+msgid "No published courses yet."
+msgstr "ഇതുവരെ പ്രസിദ്ധീകരിച്ച കോഴ്സുകളില്ല."
+
+#: templates/courses/certificate.html:4
+msgid "Certificate"
+msgstr "സർട്ടിഫിക്കറ്റ്"
+
+#: templates/courses/certificate.html:13
+msgid "Certificate of completion"
+msgstr "പൂർത്തീകരണ സർട്ടിഫിക്കറ്റ്"
+
+#: templates/courses/certificate.html:14
+msgid "This certifies that"
+msgstr "ഇത് ഇക്കാര്യം സാക്ഷ്യപ്പെടുത്തുന്നു:"
+
+#: templates/courses/certificate.html:16
+msgid "has successfully completed"
+msgstr "വിജയകരമായി പൂർത്തിയാക്കിയിരിക്കുന്നു"
+
+#: templates/courses/certificate.html:21
+#: templates/courses/verify_certificate.html:16
+msgid "Issued"
+msgstr "നൽകിയത്"
+
+#: templates/courses/certificate.html:25
+#: templates/courses/verify_certificate.html:17
+msgid "Certificate code"
+msgstr "സർട്ടിഫിക്കറ്റ് കോഡ്"
+
+#: templates/courses/certificate.html:31
+msgid "Verify this certificate at"
+msgstr "ഈ സർട്ടിഫിക്കറ്റ് പരിശോധിക്കേണ്ടത്"
+
+#: templates/courses/certificate.html:40
+msgid "Print"
+msgstr "അച്ചടിക്കുക"
+
+#: templates/courses/certificate.html:42 templates/quizzes/quiz_edit.html:113
+#: templates/quizzes/quiz_result.html:109
+#: templates/quizzes/quiz_result.html:113
+msgid "Back to course"
+msgstr "കോഴ്സിലേക്ക് തിരിച്ചുപോകുക"
+
+#: templates/courses/course_detail.html:23
+msgid "Continue"
+msgstr "തുടരുക"
+
+#: templates/courses/course_detail.html:30
+msgid "Take the quiz"
+msgstr "ക്വിസ് എടുക്കുക"
+
+#: templates/courses/course_detail.html:39
+msgid "Download certificate"
+msgstr "സർട്ടിഫിക്കറ്റ് ഡൗൺലോഡ് ചെയ്യുക"
+
+#: templates/courses/course_detail.html:44
+msgid ""
+"You are previewing this course as its instructor; learner progress is not "
+"recorded."
+msgstr "നിങ്ങൾ ഇതിന്റെ പരിശീലകൻ എന്ന നിലയിൽ ഈ കോഴ്സ് കാണുകയാണ്; വിദ്യാർത്ഥികളുടെ പുരോഗതി രേഖപ്പെടുത്തില്ല."
+
+#: templates/courses/course_detail.html:49
+msgid "Enrol"
+msgstr "ചേരുക"
+
+#: templates/courses/course_detail.html:53
+#: templates/courses/instructor/course_dashboard.html:35
+#: templates/courses/instructor/course_detail.html:31
+#: templates/courses/instructor/course_list.html:20
+#: templates/courses/instructor/dashboard.html:20
+msgid "Lessons"
+msgstr "പാഠങ്ങൾ"
+
+#: templates/courses/course_detail.html:64
+msgid "Locked"
+msgstr "പൂട്ടിയത്"
+
+#: templates/courses/course_detail.html:69
+msgid "Done"
+msgstr "പൂർത്തിയായി"
+
+#: templates/courses/course_detail.html:73
+#, python-format
+msgid "Complete “%(title)s” first."
+msgstr "ആദ്യം “%(title)s” പൂർത്തിയാക്കൂ."
+
+#: templates/courses/course_detail.html:78
+msgid "This course has no lessons yet."
+msgstr "ഈ കോഴ്സിൽ ഇതുവരെ പാഠങ്ങളില്ല."
+
+#: templates/courses/instructor/course_confirm_delete.html:4
+#: templates/courses/instructor/course_confirm_delete.html:8
+#: templates/courses/instructor/course_confirm_delete.html:19
+#: templates/courses/instructor/course_detail.html:28
+msgid "Delete course"
+msgstr "കോഴ്സ് ഇല്ലാതാക്കുക"
+
+#: templates/courses/instructor/course_confirm_delete.html:10
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete \"%(title)s\"? Its lessons will be\n"
+"      removed too.\n"
+"    "
+msgstr "\n      നിങ്ങൾ \"%(title)s\" ഇല്ലാതാക്കണോ? അതിന്റെ പാഠങ്ങളും\n      മാറ്റപ്പെടും.\n    "
+
+#: templates/courses/instructor/course_confirm_delete.html:21
+#: templates/courses/instructor/course_form.html:24
+#: templates/courses/instructor/lesson_confirm_delete.html:22
+#: templates/courses/instructor/lesson_form.html:24
+#: templates/quizzes/take_quiz.html:54 templates/quizzes/take_quiz.html:58
+msgid "Cancel"
+msgstr "റദ്ദാക്കുക"
+
+#: templates/courses/instructor/course_dashboard.html:4
+#: templates/courses/instructor/course_dashboard.html:15
+#: templates/courses/instructor/course_detail.html:18
+msgid "Learner progress"
+msgstr "വിദ്യാർത്ഥി പുരോഗതി"
+
+#: templates/courses/instructor/course_dashboard.html:17
+msgid "Download CSV"
+msgstr "CSV ഡൗൺലോഡ് ചെയ്യുക"
+
+#: templates/courses/instructor/course_dashboard.html:22
+msgid "enrolled"
+msgstr "ചേർന്നു"
+
+#: templates/courses/instructor/course_dashboard.html:23
+msgid "completed all lessons"
+msgstr "എല്ലാ പാഠങ്ങളും പൂർത്തിയാക്കി"
+
+#: templates/courses/instructor/course_dashboard.html:24
+msgid "passed the quiz"
+msgstr "ക്വിസിൽ പാസായി"
+
+#: templates/courses/instructor/course_dashboard.html:27
+#: templates/courses/instructor/dashboard.html:21
+msgid "Learners"
+msgstr "വിദ്യാർത്ഥികൾ"
+
+#: templates/courses/instructor/course_dashboard.html:30
+msgid "Each learner's progress and quiz results"
+msgstr "ഓരോ വിദ്യാർത്ഥിയുടെയും പുരോഗതിയും ക്വിസ് ഫലങ്ങളും"
+
+#: templates/courses/instructor/course_dashboard.html:34
+msgid "Enrolled"
+msgstr "ചേർന്നു"
+
+#: templates/courses/instructor/course_dashboard.html:36
+msgid "Progress"
+msgstr "പുരോഗതി"
+
+#: templates/courses/instructor/course_dashboard.html:37
+msgid "Best quiz"
+msgstr "മികച്ച ക്വിസ്"
+
+#: templates/courses/instructor/course_dashboard.html:63
+msgid "No learners have enrolled yet."
+msgstr "ഇതുവരെ ഒരു വിദ്യാർത്ഥിയും ചേർന്നിട്ടില്ല."
+
+#: templates/courses/instructor/course_dashboard.html:66
+msgid "Question analytics"
+msgstr "ചോദ്യ വിശകലനം"
+
+#: templates/courses/instructor/course_dashboard.html:69
+msgid "How often each question was answered correctly"
+msgstr "ഓരോ ചോദ്യവും എത്ര തവണ ശരിയായി ഉത്തരം നൽകി എന്ന്"
+
+#: templates/courses/instructor/course_dashboard.html:72
+msgid "Question"
+msgstr "ചോദ്യം"
+
+#: templates/courses/instructor/course_dashboard.html:73
+msgid "Answers"
+msgstr "ഉത്തരങ്ങൾ"
+
+#: templates/courses/instructor/course_dashboard.html:74
+#: templates/quizzes/quiz_edit.html:75 templates/quizzes/quiz_edit.html:91
+msgid "Correct"
+msgstr "ശരി"
+
+#: templates/courses/instructor/course_dashboard.html:75
+#, python-format
+msgid "Correct %%"
+msgstr "ശരി %%"
+
+#: templates/courses/instructor/course_dashboard.html:90
+msgid "This course has no quiz analytics yet."
+msgstr "ഈ കോഴ്സിന് ഇതുവരെ ക്വിസ് വിശകലനമില്ല."
+
+#: templates/courses/instructor/course_detail.html:19
+msgid "Add lesson"
+msgstr "പാഠം ചേർക്കുക"
+
+#: templates/courses/instructor/course_detail.html:20
+#: templates/courses/instructor/course_form.html:5
+#: templates/courses/instructor/course_form.html:11
+msgid "Edit course"
+msgstr "കോഴ്സ് എഡിറ്റ് ചെയ്യുക"
+
+#: templates/courses/instructor/course_detail.html:25
+#: templates/courses/instructor/course_list.html:40
+msgid "Unpublish"
+msgstr "പ്രസിദ്ധീകരണം നിർത്തുക"
+
+#: templates/courses/instructor/course_detail.html:25
+#: templates/courses/instructor/course_list.html:40
+msgid "Publish"
+msgstr "പ്രസിദ്ധീകരിക്കുക"
+
+#: templates/courses/instructor/course_detail.html:39
+msgid "Has a video"
+msgstr "വീഡിയോ ഉണ്ട്"
+
+#: templates/courses/instructor/course_detail.html:39
+msgid "Video"
+msgstr "വീഡിയോ"
+
+#: templates/courses/instructor/course_detail.html:40
+msgid "Has an attachment"
+msgstr "അറ്റാച്ചുമെന്റ് ഉണ്ട്"
+
+#: templates/courses/instructor/course_detail.html:40
+msgid "File"
+msgstr "ഫയൽ"
+
+#: templates/courses/instructor/course_detail.html:47
+#: templates/quizzes/quiz_edit.html:51
+msgid "Up"
+msgstr "മുകളിലേക്ക്"
+
+#: templates/courses/instructor/course_detail.html:53
+#: templates/quizzes/quiz_edit.html:56
+msgid "Down"
+msgstr "താഴേക്ക്"
+
+#: templates/courses/instructor/course_detail.html:57
+#: templates/courses/instructor/course_list.html:35
+msgid "Edit"
+msgstr "എഡിറ്റ് ചെയ്യുക"
+
+#: templates/courses/instructor/course_detail.html:60
+#: templates/quizzes/quiz_edit.html:61 templates/quizzes/quiz_edit.html:76
+msgid "Delete"
+msgstr "ഇല്ലാതാക്കുക"
+
+#: templates/courses/instructor/course_detail.html:67
+msgid "This course has no lessons yet. Add one before publishing."
+msgstr "ഈ കോഴ്സിൽ ഇതുവരെ പാഠങ്ങളില്ല. പ്രസിദ്ധീകരിക്കുന്നതിന് മുമ്പ് ഒന്ന് ചേർക്കുക."
+
+#: templates/courses/instructor/course_detail.html:73
+msgid "Edit quiz"
+msgstr "ക്വിസ് എഡിറ്റ് ചെയ്യുക"
+
+#: templates/courses/instructor/course_detail.html:73
+msgid "Add quiz"
+msgstr "ക്വിസ് ചേർക്കുക"
+
+#: templates/courses/instructor/course_detail.html:79
+#, python-format
+msgid ""
+"\n"
+"          %(total)s question.\n"
+"        "
+msgid_plural ""
+"\n"
+"          %(total)s questions.\n"
+"        "
+msgstr[0] "\n          %(total)s ചോദ്യം.\n        "
+msgstr[1] "\n          %(total)s ചോദ്യങ്ങൾ.\n        "
+
+#: templates/courses/instructor/course_detail.html:87
+msgid "This quiz is hidden from learners until it has at least one question."
+msgstr "കുറഞ്ഞത് ഒരു ചോദ്യമെങ്കിലും ഉള്ളതുവരെ ഈ ക്വിസ് വിദ്യാർത്ഥികളിൽ നിന്ന് മറച്ചിരിക്കുന്നു."
+
+#: templates/courses/instructor/course_detail.html:91
+msgid "This course has no quiz yet."
+msgstr "ഈ കോഴ്സിന് ഇതുവരെ ക്വിസില്ല."
+
+#: templates/courses/instructor/course_form.html:5
+#: templates/courses/instructor/course_form.html:11
+#: templates/courses/instructor/course_list.html:10
+#: templates/courses/instructor/dashboard.html:10
+msgid "New course"
+msgstr "പുതിയ കോഴ്സ്"
+
+#: templates/courses/instructor/course_form.html:21
+msgid "Save course"
+msgstr "കോഴ്സ് സംരക്ഷിക്കുക"
+
+#: templates/courses/instructor/course_list.html:15
+msgid "Your courses and their status"
+msgstr "നിങ്ങളുടെ കോഴ്സുകളും അവയുടെ സ്ഥിതിയും"
+
+#: templates/courses/instructor/course_list.html:18
+msgid "Title"
+msgstr "തലക്കെട്ട്"
+
+#: templates/courses/instructor/course_list.html:19
+#: templates/courses/instructor/dashboard.html:19
+msgid "Status"
+msgstr "സ്ഥിതി"
+
+#: templates/courses/instructor/course_list.html:21
+#: templates/courses/instructor/dashboard.html:22
+msgid "Actions"
+msgstr "പ്രവർത്തനങ്ങൾ"
+
+#: templates/courses/instructor/course_list.html:50
+#: templates/courses/instructor/dashboard.html:48
+msgid "You have not created any courses yet."
+msgstr "നിങ്ങൾ ഇതുവരെ ഒരു കോഴ്സും സൃഷ്ടിച്ചിട്ടില്ല."
+
+#: templates/courses/instructor/dashboard.html:15
+msgid "Your courses, learners and status"
+msgstr "നിങ്ങളുടെ കോഴ്സുകൾ, വിദ്യാർത്ഥികൾ, സ്ഥിതി"
+
+#: templates/courses/instructor/dashboard.html:18
+msgid "Course"
+msgstr "കോഴ്സ്"
+
+#: templates/courses/instructor/dashboard.html:37
+msgid "View progress"
+msgstr "പുരോഗതി കാണുക"
+
+#: templates/courses/instructor/dashboard.html:40
+msgid "CSV"
+msgstr "CSV"
+
+#: templates/courses/instructor/lesson_confirm_delete.html:4
+#: templates/courses/instructor/lesson_confirm_delete.html:11
+#: templates/courses/instructor/lesson_confirm_delete.html:20
+msgid "Delete lesson"
+msgstr "പാഠം ഇല്ലാതാക്കുക"
+
+#: templates/courses/instructor/lesson_confirm_delete.html:13
+#, python-format
+msgid ""
+"\n"
+"      Are you sure you want to delete the lesson \"%(title)s\"?\n"
+"    "
+msgstr "\n      പാഠം \"%(title)s\" ഇല്ലാതാക്കണോ?\n    "
+
+#: templates/courses/instructor/lesson_form.html:5
+#: templates/courses/instructor/lesson_form.html:13
+msgid "Edit lesson"
+msgstr "പാഠം എഡിറ്റ് ചെയ്യുക"
+
+#: templates/courses/instructor/lesson_form.html:5
+#: templates/courses/instructor/lesson_form.html:13
+msgid "New lesson"
+msgstr "പുതിയ പാഠം"
+
+#: templates/courses/instructor/lesson_form.html:22
+msgid "Save lesson"
+msgstr "പാഠം സംരക്ഷിക്കുക"
+
+#: templates/courses/lesson.html:21
+msgid "Watch the video"
+msgstr "വീഡിയോ കാണുക"
+
+#: templates/courses/lesson.html:22
+msgid "(opens in a new tab)"
+msgstr "(പുതിയ ടാബിൽ തുറക്കും)"
+
+#: templates/courses/lesson.html:28
+msgid "Download the attachment"
+msgstr "അറ്റാച്ചുമെന്റ് ഡൗൺലോഡ് ചെയ്യുക"
+
+#: templates/courses/lesson.html:32
+msgid "Preview: learner progress is not recorded."
+msgstr "പ്രീവ്യൂ: വിദ്യാർത്ഥികളുടെ പുരോഗതി രേഖപ്പെടുത്തില്ല."
+
+#: templates/courses/lesson.html:34
+msgid "You have completed this lesson."
+msgstr "നിങ്ങൾ ഈ പാഠം പൂർത്തിയാക്കി."
+
+#: templates/courses/lesson.html:38
+msgid "Mark complete"
+msgstr "പൂർത്തിയായി അടയാളപ്പെടുത്തുക"
+
+#: templates/courses/lesson.html:42
+msgid "Lesson navigation"
+msgstr "പാഠ നാവിഗേഷൻ"
+
+#: templates/courses/lesson.html:45 templates/partials/_pagination.html:5
+msgid "Previous"
+msgstr "മുൻപത്തെ"
+
+#: templates/courses/lesson.html:50 templates/partials/_pagination.html:9
+msgid "Next"
+msgstr "അടുത്തത്"
+
+#: templates/courses/lesson.html:54
+#, python-format
+msgid "Finish this lesson to unlock “%(title)s”."
+msgstr "“%(title)s” തുറക്കാൻ ഈ പാഠം പൂർത്തിയാക്കൂ."
+
+#: templates/courses/my_courses.html:25
+msgid "You are not enrolled in any courses yet."
+msgstr "നിങ്ങൾ ഇതുവരെ ഒരു കോഴ്സിലും ചേർന്നിട്ടില്ല."
+
+#: templates/courses/my_courses.html:26
+msgid "Browse the catalogue"
+msgstr "കാറ്റലോഗ് കാണുക"
+
+#: templates/courses/verify_certificate.html:4
+msgid "Verify certificate"
+msgstr "സർട്ടിഫിക്കറ്റ് പരിശോധിക്കുക"
+
+#: templates/courses/verify_certificate.html:8
+msgid "Certificate verification"
+msgstr "സർട്ടിഫിക്കറ്റ് പരിശോധന"
+
+#: templates/courses/verify_certificate.html:11
+msgid "Valid certificate"
+msgstr "സാധുവായ സർട്ടിഫിക്കറ്റ്"
+
+#: templates/courses/verify_certificate.html:13
+#, python-format
+msgid "This certificate was issued to %(name)s for completing:"
+msgstr "ഈ സർട്ടിഫിക്കറ്റ് %(name)s എന്നയാൾക്ക് ഇത് പൂർത്തിയാക്കിയതിന് നൽകിയതാണ്:"
+
+#: templates/courses/verify_certificate.html:20
+msgid "No certificate was found for this code."
+msgstr "ഈ കോഡിന് ഒരു സർട്ടിഫിക്കറ്റും കണ്ടെത്തിയില്ല."
+
+#: templates/partials/_pagination.html:3
+msgid "Pagination"
+msgstr "പേജുകൾ"
+
+#: templates/partials/_pagination.html:7
+#, python-format
+msgid "Page %(number)s of %(total)s"
+msgstr "പേജ് %(number)s, ആകെ %(total)s"
+
+#: templates/quizzes/quiz_edit.html:15
+msgid ""
+"This quiz already has recorded attempts. Editing questions or choices will "
+"not delete those attempts, but learners who revisit the quiz may see "
+"different questions. Removing a choice detaches it from old answers; the "
+"recorded score is unchanged."
+msgstr "ഈ ക്വിസിൽ ഇതിനകം രേഖപ്പെടുത്തിയ ശ്രമങ്ങൾ ഉണ്ട്. ചോദ്യങ്ങളോ ഓപ്ഷനുകളോ എഡിറ്റ് ചെയ്യുന്നത് ആ ശ്രമങ്ങൾ ഇല്ലാതാക്കില്ല, പക്ഷേ ക്വിസിൽ വീണ്ടും എത്തുന്ന വിദ്യാർത്ഥികൾക്ക് വ്യത്യസ്തമായ ചോദ്യങ്ങൾ കാണാം. ഒരു ഓപ്ഷൻ നീക്കുന്നത് അതിനെ പഴയ ഉത്തരങ്ങളിൽ നിന്ന് വേർപെടുത്തും; രേഖപ്പെടുത്തിയ സ്കോർ മാറില്ല."
+
+#: templates/quizzes/quiz_edit.html:24
+msgid "Settings"
+msgstr "ക്രമീകരണങ്ങൾ"
+
+#: templates/quizzes/quiz_edit.html:31
+msgid "Questions"
+msgstr "ചോദ്യങ്ങൾ"
+
+#: templates/quizzes/quiz_edit.html:37
+#, python-format
+msgid "Question %(number)s"
+msgstr "ചോദ്യം %(number)s"
+
+#: templates/quizzes/quiz_edit.html:39
+msgid "New question"
+msgstr "പുതിയ ചോദ്യം"
+
+#: templates/quizzes/quiz_edit.html:71
+msgid "Choices for this question"
+msgstr "ഈ ചോദ്യത്തിനുള്ള ഓപ്ഷനുകൾ"
+
+#: templates/quizzes/quiz_edit.html:74
+msgid "Choice"
+msgstr "ഓപ്ഷൻ"
+
+#: templates/quizzes/quiz_edit.html:83
+msgid "Choice text"
+msgstr "ഓപ്ഷൻ വാചകം"
+
+#: templates/quizzes/quiz_edit.html:96
+msgid "Delete this choice"
+msgstr "ഈ ഓപ്ഷൻ ഇല്ലാതാക്കുക"
+
+#: templates/quizzes/quiz_edit.html:111
+msgid "Save quiz"
+msgstr "ക്വിസ് സംരക്ഷിക്കുക"
+
+#: templates/quizzes/quiz_result.html:4 templates/quizzes/quiz_result.html:16
+msgid "Quiz result"
+msgstr "ക്വിസ് ഫലം"
+
+#: templates/quizzes/quiz_result.html:20
+msgid "Preview mode: nothing was saved."
+msgstr "പ്രീവ്യൂ മോഡ്: ഒന്നും സംരക്ഷിച്ചില്ല."
+
+#: templates/quizzes/quiz_result.html:25 templates/quizzes/quiz_result.html:59
+msgid "Failed"
+msgstr "പരാജയപ്പെട്ടു"
+
+#: templates/quizzes/quiz_result.html:30
+#, python-format
+msgid "Score: %(score)s of %(total)s"
+msgstr "സ്കോർ: ആകെ %(total)s-ൽ %(score)s"
+
+#: templates/quizzes/quiz_result.html:33
+#, python-format
+msgid "Result: %(percent)s%%"
+msgstr "ഫലം: %(percent)s%%"
+
+#: templates/quizzes/quiz_result.html:36 templates/quizzes/take_quiz.html:25
+#, python-format
+msgid "Pass mark: %(mark)s%%"
+msgstr "പാസ് മാർക്ക്: %(mark)s%%"
+
+#: templates/quizzes/quiz_result.html:41
+msgid "Attempt history"
+msgstr "ശ്രമ ചരിത്രം"
+
+#: templates/quizzes/quiz_result.html:43
+msgid "All your attempts at this quiz, newest first"
+msgstr "ഈ ക്വിസിലെ നിങ്ങളുടെ എല്ലാ ശ്രമങ്ങളും, ഏറ്റവും പുതിയത് ആദ്യം"
+
+#: templates/quizzes/quiz_result.html:46
+msgid "When"
+msgstr "എപ്പോൾ"
+
+#: templates/quizzes/quiz_result.html:47
+msgid "Score"
+msgstr "സ്കോർ"
+
+#: templates/quizzes/quiz_result.html:48
+msgid "Result"
+msgstr "ഫലം"
+
+#: templates/quizzes/quiz_result.html:49
+msgid "Details"
+msgstr "വിശദാംശങ്ങൾ"
+
+#: templates/quizzes/quiz_result.html:57
+#, python-format
+msgid "%(score)s of %(total)s (%(percent)s%%)"
+msgstr "ആകെ %(total)s-ൽ %(score)s (%(percent)s%%)"
+
+#: templates/quizzes/quiz_result.html:62
+msgid "This attempt"
+msgstr "ഈ ശ്രമം"
+
+#: templates/quizzes/quiz_result.html:66
+msgid "View"
+msgstr "കാണുക"
+
+#: templates/quizzes/quiz_result.html:66
+#, python-format
+msgid "attempt from %(when)s"
+msgstr "%(when)s എന്ന തീയതിയിലെ ശ്രമം"
+
+#: templates/quizzes/quiz_result.html:77
+msgid "Answer review"
+msgstr "ഉത്തര അവലോകനം"
+
+#: templates/quizzes/quiz_result.html:84
+#, python-format
+msgid "Your answer: %(choice)s"
+msgstr "നിങ്ങളുടെ ഉത്തരം: %(choice)s"
+
+#: templates/quizzes/quiz_result.html:86
+msgid "Your answer: no answer"
+msgstr "നിങ്ങളുടെ ഉത്തരം: ഉത്തരമില്ല"
+
+#: templates/quizzes/quiz_result.html:92
+#, python-format
+msgid "Correct answer: %(choice)s"
+msgstr "ശരിയായ ഉത്തരം: %(choice)s"
+
+#: templates/quizzes/quiz_result.html:94
+msgid "This question no longer has a correct answer."
+msgstr "ഈ ചോദ്യത്തിന് ഇപ്പോൾ ശരിയായ ഉത്തരമില്ല."
+
+#: templates/quizzes/quiz_result.html:105
+msgid "Retake quiz"
+msgstr "വീണ്ടും ക്വിസ് എടുക്കുക"
+
+#: templates/quizzes/take_quiz.html:20
+msgid "Preview mode: your answers are graded for you, but nothing is saved."
+msgstr "പ്രീവ്യൂ മോഡ്: നിങ്ങളുടെ ഉത്തരങ്ങൾ ഗ്രേഡ് ചെയ്യപ്പെടും, പക്ഷേ ഒന്നും സംരക്ഷിക്കില്ല."
+
+#: templates/quizzes/take_quiz.html:37
+#, python-format
+msgid "Question %(number)s:"
+msgstr "ചോദ്യം %(number)s:"
+
+#: templates/quizzes/take_quiz.html:51
+msgid "Submit answers"
+msgstr "ഉത്തരങ്ങൾ സമർപ്പിക്കുക"

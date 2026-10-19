@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Dashboard" %} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section>
+  <h1>{% trans "Dashboard" %}</h1>
+  <p>
+    <a class="button" href="{% url 'courses:instructor_dashboard' %}">
+      {% trans "Course analytics" %}
+    </a>
+    <a class="button button--secondary" href="{% url 'courses:instructor_course_list' %}">
+      {% trans "Manage my courses" %}
+    </a>
+  </p>
+</section>
+{% endblock %}

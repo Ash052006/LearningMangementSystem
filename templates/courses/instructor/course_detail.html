@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ course.title }} — {{ block.super }}{% endblock %}
+
+{% block content %}
+<section>
+  <p class="breadcrumb">
+    <a href="{% url 'courses:instructor_course_list' %}">{% trans "My courses" %}</a>
+  </p>
+
+  <div class="page-heading">
+    <h1>{{ course.title }} {% include "courses/instructor/_status_badge.html" %}</h1>
+  </div>
+  {% if course.description %}<p>{{ course.description }}</p>{% endif %}
+
+  <div class="toolbar">
+    <a class="button" href="{% url 'courses:course_dashboard' course.pk %}">{% trans "Learner progress" %}</a>
+    <a class="button button--secondary" href="{% url 'courses:lesson_create' course.pk %}">{% trans "Add lesson" %}</a>
+    <a class="button button--secondary" href="{% url 'courses:course_edit' course.pk %}">{% trans "Edit course" %}</a>
+    {# Publish/unpublish is a state change: POST only. #}
+    <form method="post" action="{% url 'courses:course_toggle_publish' course.pk %}">
+      {% csrf_token %}
+      <button type="submit" class="button button--secondary">
+        {% if course.is_published %}{% trans "Unpublish" %}{% else %}{% trans "Publish" %}{% endif %}
+      </button>
+    </form>
+    <a class="button button--danger" href="{% url 'courses:course_delete' course.pk %}">{% trans "Delete course" %}</a>
+  </div>
+
+  <h2>{% trans "Lessons" %}</h2>
+  {% if course.lessons.all %}
+    <ol class="lesson-list">
+      {% for lesson in course.lessons.all %}
+        <li class="lesson-item">
+          <div class="lesson-title">
+            <span class="lesson-position" aria-hidden="true">{{ lesson.position }}</span>
+            <span class="lesson-name">{{ lesson.title }}</span>
+            {% if lesson.video_url %}<span class="tag" title="{% trans 'Has a video' %}">{% trans "Video" %}</span>{% endif %}
+            {% if lesson.attachment %}<span class="tag" title="{% trans 'Has an attachment' %}">{% trans "File" %}</span>{% endif %}
+          </div>
+          <div class="lesson-actions">
+            {# Hidden lesson name gives each repeated action a distinct name. #}
+            <form method="post" action="{% url 'courses:lesson_move_up' course.pk lesson.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="button-link" {% if forloop.first %}disabled{% endif %}>
+                {% trans "Up" %}<span class="visually-hidden"> {{ lesson.title }}</span>
+              </button>
+            </form>
+            <form method="post" action="{% url 'courses:lesson_move_down' course.pk lesson.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="button-link" {% if forloop.last %}disabled{% endif %}>
+                {% trans "Down" %}<span class="visually-hidden"> {{ lesson.title }}</span>
+              </button>
+            </form>
+            <a href="{% url 'courses:lesson_edit' course.pk lesson.pk %}">
+              {% trans "Edit" %}<span class="visually-hidden"> {{ lesson.title }}</span>
+            </a>
+            <a href="{% url 'courses:lesson_delete' course.pk lesson.pk %}">
+              {% trans "Delete" %}<span class="visually-hidden"> {{ lesson.title }}</span>
+            </a>
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p>{% trans "This course has no lessons yet. Add one before publishing." %}</p>
+  {% endif %}
+
+  <h2>{% trans "Quiz" %}</h2>
+  <div class="toolbar">
+    <a class="button button--secondary" href="{% url 'quizzes:quiz_edit' course.pk %}">
+      {% if course.quiz %}{% trans "Edit quiz" %}{% else %}{% trans "Add quiz" %}{% endif %}
+    </a>
+  </div>
+  {% if course.quiz %}
+    {% if course.quiz.has_questions %}
+      <p>
+        {% blocktrans count total=course.quiz.questions.count %}
+          {{ total }} question.
+        {% plural %}
+          {{ total }} questions.
+        {% endblocktrans %}
+      </p>
+    {% else %}
+      <p class="notice notice--warning">
+        {% trans "This quiz is hidden from learners until it has at least one question." %}
+      </p>
+    {% endif %}
+  {% else %}
+    <p>{% trans "This course has no quiz yet." %}</p>
+  {% endif %}
+</section>
+{% endblock %}

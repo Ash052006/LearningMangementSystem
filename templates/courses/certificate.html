@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans "Certificate" %} — {{ course.title }} — {{ block.super }}{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/certificate.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="certificate">
+  <div class="certificate-sheet">
+    <p class="certificate-kicker">{% trans "Certificate of completion" %}</p>
+    <p class="certificate-lead">{% trans "This certifies that" %}</p>
+    <h1 class="certificate-name">{{ certificate.holder_name }}</h1>
+    <p class="certificate-lead">{% trans "has successfully completed" %}</p>
+    <p class="certificate-course">{{ certificate.course.title }}</p>
+
+    <dl class="certificate-meta">
+      <div>
+        <dt>{% trans "Issued" %}</dt>
+        <dd>{{ certificate.issued_at|date:"DATE_FORMAT" }}</dd>
+      </div>
+      <div>
+        <dt>{% trans "Certificate code" %}</dt>
+        <dd class="certificate-code">{{ certificate.code }}</dd>
+      </div>
+    </dl>
+
+    <p class="certificate-verify-note">
+      {% trans "Verify this certificate at" %}
+      <a href="{% url 'certificate_verify' certificate.code %}">
+        {% url 'certificate_verify' certificate.code %}
+      </a>
+    </p>
+  </div>
+
+  {# On screen only: printing should show just the certificate itself. #}
+  <p class="certificate-actions">
+    <button type="button" class="button" onclick="window.print()">{% trans "Print" %}</button>
+    <a class="button button--secondary" href="{% url 'courses:learner_course_detail' course.pk %}">
+      {% trans "Back to course" %}
+    </a>
+  </p>
+</section>
+{% endblock %}
