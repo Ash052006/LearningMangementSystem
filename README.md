@@ -10,6 +10,8 @@ and take quizzes.
 Stack: Django 5.x, Python 3.12, SQLite, server-rendered templates, plain
 Django forms. Apps: `accounts` (custom user), `courses`, `quizzes`, and `api`
 (DRF). Business logic lives in `services.py` modules, not views/templates.
+The interface uses Django templates and two hand-written CSS files; no
+JavaScript build tool or external UI framework is required.
 
 ## Prerequisites
 
@@ -88,6 +90,20 @@ ruff format --check . && ruff check .   # check formatting and lint
 Config comes from environment variables via django-environ; `.env.example`
 documents the variables and `.env` is gitignored.
 
+## Interface
+
+The shared layout provides role-appropriate navigation, a language selector,
+skip-to-content link, status messages and a consistent footer. Course discovery,
+learner course and lesson pages, instructor management and analytics, forms,
+quizzes, certificates and error pages use the same visual styles. Course cards
+and illustrations use course data and simple inline SVG artwork; the project
+does not require stock images or a JavaScript framework.
+
+`static/css/style.css` contains the original site styles and
+`static/css/app.css` provides the current visual theme, component layouts and
+responsive breakpoints. The templates remain server-rendered, and their
+existing routes, forms and permission checks are unchanged by the styling.
+
 ## Running with Docker
 
 The project ships with a `Dockerfile` and `docker-compose.yml`, so the whole
@@ -141,7 +157,7 @@ quizzes/           Quiz, Question, Choice, QuizAttempt, AttemptAnswer;
                    authoring, taking, grading and submission services
 api/               DRF serializers, views and URLs for the /api/v1/ JSON API
 templates/         base + error pages, and one folder per app area
-static/css/        a single hand-written stylesheet
+static/css/        hand-written base and application stylesheets
 locale/            .po/.mo translation catalogs (ml = Malayalam)
 manage.py          Django's entry point
 requirements.txt   Django, django-environ, DRF, drf-spectacular, gunicorn,
@@ -887,12 +903,30 @@ lesson ordering on the attachment URL. Full suite: **417 tests**, coverage 99%.
 
 ---
 
-## Next tasks
+## Task 20: interface refresh
 
-Remaining work (see NOTES.md for placeholders and pending decisions): any
-notification features, and the security findings not included in the first
-batch (M-3–M-5, L-1–L-4, I-1–I-5). The instructor dashboard/reporting, CSV
-export, private attachments, demo seeding, catalogue search/filter/sort,
-lesson-order enforcement, completion certificates, the accessibility pass, the
-JSON API, Docker/CI, English/Malayalam i18n and the first security batch are
-done in Tasks 9–19.
+The shared navigation and learner/instructor pages received a cohesive visual
+refresh using the existing Django templates and CSS. It includes responsive
+layouts, consistent cards/forms/tables/status states, and shared styling for
+course discovery, learning, authoring, quizzes, certificates and empty/error
+pages. Course content remains database-driven; the artwork is decorative SVG,
+not fabricated course imagery or metrics. No model, route, API, form submission
+or permission behavior was changed for this work.
+
+- `templates/base.html` — role-specific navigation, visible language selector,
+  branded shared shell and footer
+- `templates/` — refreshed catalogue, course, lesson, dashboard, quiz and
+  certificate presentation, retaining existing forms and actions
+- `static/css/app.css` — theme tokens, components, responsive layouts, visible
+  focus and reduced-motion handling
+
+Validation: `python manage.py check`, `python manage.py makemigrations
+--check --dry-run`, all **417 tests**, Ruff lint/format checks, and
+`git diff --check` passed. The local preview served the updated CSS and login
+page; an interactive browser viewport review was not completed.
+
+## Remaining work
+
+Notification/email workflows are not implemented. The additional findings
+listed in NOTES.md were outside the first security-fix batch. The redesigned
+local interface is committed and pushed separately from the initial submission.

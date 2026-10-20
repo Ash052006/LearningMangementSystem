@@ -15,6 +15,21 @@ the notes structure and demo seed data. The draft does not record a reliable
 breakdown of which individual lines or decisions were written independently
 versus with AI assistance.
 
+An AI assistant also helped refresh the existing Django templates and CSS
+presentation. No backend behavior or course data was changed for that
+interface work.
+
+## Interface
+
+The UI is rendered by Django templates and styled by `static/css/style.css`
+and `static/css/app.css`; it does not use a JavaScript framework or external
+component library. The shared navigation is role-aware and includes a language
+selector. Catalogue, learner, instructor, quiz, certificate and error pages
+share responsive layouts, form and status styling, and accessible focus
+indicators. Course artwork is decorative inline SVG rather than uploaded or
+stock imagery. Existing form submissions, routes and permission checks remain
+the source of application behavior.
+
 ## Data model and design choices
 
 - `accounts.User` extends Django's `AbstractUser` and is configured before the
@@ -68,4 +83,4 @@ findings were left out of scope.
 
 ## Time spent
 
-**Total time was not tracked, so I cannot give a reliable figure.**
+** 6hrs**
